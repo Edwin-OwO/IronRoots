@@ -12,6 +12,8 @@ namespace Economia
         public int Money => money;
         public int PassiveEntryPerTick => passiveEntryPerTick;
 
+        public event System.Action<int> OnMoneyChanged; 
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -24,12 +26,12 @@ namespace Economia
         
         public void RegisterCrop(IEntrySource entry)
         {
-            entry.OnEntryGenerated += AgregarDinero;
+            entry.OnEntryGenerated += AddMoney;
         }
         
         public void UnregisterCrop(IEntrySource entry)
         {
-            entry.OnEntryGenerated -= AgregarDinero;
+            entry.OnEntryGenerated -= AddMoney;
         }
 
         public void RegisterPassiveMoney(int monto)
@@ -45,10 +47,10 @@ namespace Economia
         public void PassiveEntryOnTick()
         {
             if (passiveEntryPerTick > 0)
-                AgregarDinero(passiveEntryPerTick);
+                AddMoney(passiveEntryPerTick);
         }
 
-        public void AgregarDinero(int monto)
+        public void AddMoney(int monto)
         {
             money += monto;
         }
@@ -59,6 +61,7 @@ namespace Economia
         {
             if (!CanBuy(cost)) return false;
             money -= cost;
+            OnMoneyChanged?.Invoke(money);
             return true;
         }
     }
