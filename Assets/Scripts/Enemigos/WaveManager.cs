@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Nucleo;
 using UnityEngine;
@@ -24,6 +25,11 @@ namespace Enemigos
 
         public bool waveOnGoing => remainEnemies > 0;
         public int ActualWave => actualWave;
+
+        public void Start()
+        {
+            StartNextWave();
+        }
 
         public void StartNextWave()
         {
