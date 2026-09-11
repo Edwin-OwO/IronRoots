@@ -38,14 +38,12 @@ namespace Nucleo
         {
             turret.Upgrade();
         }
-
-        /// <summary>T es el tipo de cultivo elegido en la UI (CultivoBasico, CultivoPremium, ...).</summary>
+        
         public void PlantarEnFarmSlot<T>(FarmSlot slot, int cost) where T : CropBase
         {
             slot.PlantCrop<T>(cost);
         }
-
-        /// <summary>Se llama con la posicion en mundo correspondiente al click del cursor.</summary>
+        
         public void UseExplosionTool(Vector2 cursorPosition)
         {
             explosiveTool.ActiveOnPosition(cursorPosition);

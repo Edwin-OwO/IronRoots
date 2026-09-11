@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Economia;
+using TMPro;
+
 namespace UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private Text textoDinero;
-        [SerializeField] private Text textoVidas;
+        [SerializeField] private TextMeshProUGUI MoneyText;
+        [SerializeField] private TextMeshProUGUI LivesText;
         [SerializeField] private GameObject panelGameOver;
 
         private void Start()
@@ -23,12 +24,12 @@ namespace UI
 
         public void UpdateMoney(int amount)
         {
-            textoDinero.text = $"$ {amount}";
+            MoneyText.text = $"$ {amount}";
         }
 
         public void UpdateLifes(int amount)
         {
-            textoVidas.text = $"Vidas: {amount}";
+            LivesText.text = $"Vidas: {amount}";
         }
 
         public void ShowGameOver()
