@@ -13,8 +13,10 @@ namespace Enemigos
         public int amount;
         public float timeBetweenSpawns = 0.5f;
     }
-    public class  WaveManager: MonoBehaviour, IEnemyObserver
+    public class  WaveManager: MonoBehaviour
     {
+        public static event Action OnWaveEnd;
+        
         [SerializeField] private List<WaveData> waves;
         [SerializeField] private Path principalPath;
         [SerializeField] private Transform spawnPoint;
@@ -23,14 +25,9 @@ namespace Enemigos
         private int actualWave = -1;
         private int remainEnemies;
 
-        public bool waveOnGoing => remainEnemies > 0;
+        public bool waveOnGoing => remainEnemies > 0; 
         public int ActualWave => actualWave;
-
-        public void Start()
-        {
-            StartNextWave();
-        }
-
+        
         public void StartNextWave()
         {
             actualWave++;
@@ -57,21 +54,24 @@ namespace Enemigos
             GameObject instance = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
             Enemy enemy = instance.GetComponent<Enemy>();
             enemy.Initialize(principalPath);
-            enemy.Subscribe(this);
+            enemy.OnEnemyDied += OnDie;
+            enemy.OnEnemyReachedEnd += OnFinalStep;
             remainEnemies++;
         }
 
-        public void OnDie(Enemy enemigo)
+        private void OnDie(Enemy enemy)
         {
             remainEnemies--;
             ChekWaveEnd();
+            enemy.OnEnemyDied -= OnDie;
         }
 
-        public void OnFinalStep(Enemy enemy)
+        private void OnFinalStep(Enemy enemy)
         {
-            farmBase.TakeDamage(enemy.Damage);
+            farmBase.TakeDamage();
             remainEnemies--;
             ChekWaveEnd();
+            enemy.OnEnemyReachedEnd -= OnFinalStep;
         }
 
         private void ChekWaveEnd()
@@ -79,6 +79,7 @@ namespace Enemigos
             if (remainEnemies <= 0)
             {
                 Debug.Log($"Oleada {actualWave + 1} completada.");
+                OnWaveEnd?.Invoke();
             }
         }
     }

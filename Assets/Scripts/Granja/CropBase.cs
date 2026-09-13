@@ -4,21 +4,20 @@ using UnityEngine;
 
 namespace Granja
 {
-    public abstract class CropBase : MonoBehaviour, ICrop, IEntrySource
-    {
-       [SerializeField] protected int moneyPerCycle = 2;
-        [SerializeField] protected float timePerCycle = 5f;
-
-        public int MoneyPerCycle => moneyPerCycle;
+    public class CropBase : MonoBehaviour, ICrop, IEntrySource
+    { 
+        [SerializeField] protected CropData data; 
+       
+        public int MoneyPerCycle => data.MoneyPerCycle;
         public event Action<int> OnEntryGenerated;
         public virtual void StartCycle()
         {
-            InvokeRepeating(nameof(Harvest), timePerCycle, timePerCycle);
+            InvokeRepeating(nameof(Harvest), data.TimePerCycle, data.TimePerCycle);
         }
 
         public virtual void Harvest()
         {
-            OnEntryGenerated?.Invoke(moneyPerCycle);
+            OnEntryGenerated?.Invoke(data.MoneyPerCycle);
         }
 
         private void OnDisable()

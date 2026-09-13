@@ -15,7 +15,7 @@ namespace Granja
             if (!EconomyManager.Instance.PayCost(cost)) return false;
 
             actualCrop = gameObject.AddComponent<T>();
-            EconomyManager.Instance.RegisterCrop(actualCrop);
+            EconomyManager.Instance.RegisterEntity(actualCrop);
             EconomyManager.Instance.RegisterPassiveMoney(actualCrop.MoneyPerCycle);
             actualCrop.StartCycle();
             return true;
@@ -26,7 +26,7 @@ namespace Granja
             if (!Taked) return;
 
             EconomyManager.Instance.ReducePassiveMoney(actualCrop.MoneyPerCycle);
-            EconomyManager.Instance.UnregisterCrop(actualCrop);
+            EconomyManager.Instance.UnregisterEntity(actualCrop);
 
             Destroy(actualCrop);
             actualCrop = null;

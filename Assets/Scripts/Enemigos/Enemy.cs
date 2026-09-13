@@ -14,26 +14,19 @@ namespace Enemigos
 
         private Path path;
         private int actualIndexWeapon;
+        private float zposition;
         private readonly List<IEnemyObserver> observers = new List<IEnemyObserver>();
 
         public int Damage => damage;
         public event Action<int> OnEntryGenerated;
+        public event Action<Enemy> OnEnemyDied;
+        public event Action<Enemy> OnEnemyReachedEnd;
         
         public void Initialize(Path path)
         {
             this.path = path;
             actualIndexWeapon = 0;
-        }
-
-        public void Subscribe(IEnemyObserver observer)
-        {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
-        }
-
-        public void Unsubscribe(IEnemyObserver observer)
-        {
-            observers.Remove(observer);
+            zposition = transform.position.z;
         }
 
         private void Update()
@@ -44,10 +37,11 @@ namespace Enemigos
         private void Move()
         {
             if (path == null) return;
-
+            Vector2 actualPosition = transform.position;
             Vector2 objetive = path.GetWaypoint(actualIndexWeapon);
-            transform.position = Vector2.MoveTowards(transform.position, objetive, velocity * Time.deltaTime);
-
+            Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
+            transform.position = new Vector3(newPosition.x, newPosition.y, zposition);
+            
             if (Vector2.Distance(transform.position, objetive) < 0.05f)
             {
                 actualIndexWeapon++;
@@ -70,22 +64,13 @@ namespace Enemigos
         private void Die()
         {
             OnEntryGenerated?.Invoke(bounty);
-
-            foreach (var observador in observers)
-            {
-                observador.OnDie(this);
-            }
-
+            OnEnemyDied?.Invoke(this);
             Destroy(gameObject);
         }
 
         private void OnEndStep()
         {
-            foreach (var observador in observers)
-            {
-                observador.OnFinalStep(this);
-            }
-
+            OnEnemyReachedEnd?.Invoke(this);
             Destroy(gameObject);
         }
     }

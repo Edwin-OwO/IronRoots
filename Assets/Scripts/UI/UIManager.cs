@@ -1,5 +1,7 @@
 using UnityEngine;
 using Economia;
+using Enemigos;
+using Nucleo;
 using TMPro;
 
 namespace UI
@@ -8,18 +10,21 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI MoneyText;
         [SerializeField] private TextMeshProUGUI LivesText;
+        [SerializeField] private GameObject waveButton;
         [SerializeField] private GameObject panelGameOver;
-
-        private void Start()
+        
+        private void OnEnable()
         {
-            EconomyManager.Instance.OnMoneyChanged += UpdateMoney;
-            UpdateMoney(EconomyManager.Instance.Money);
+            EconomyManager.OnMoneyChanged += UpdateMoney;
+            WaveManager.OnWaveEnd += ShowWaveButton;
+            FarmBase.OnEnemieEnter += UpdateLife;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            if (EconomyManager.Instance != null)
-                EconomyManager.Instance.OnMoneyChanged -= UpdateMoney;
+                EconomyManager.OnMoneyChanged -= UpdateMoney;
+                WaveManager.OnWaveEnd -= ShowWaveButton;
+                FarmBase.OnEnemieEnter -= UpdateLife;
         }
 
         public void UpdateMoney(int amount)
@@ -27,11 +32,16 @@ namespace UI
             MoneyText.text = $"$ {amount}";
         }
 
-        public void UpdateLifes(int amount)
+        public void UpdateLife(int amount)
         {
-            LivesText.text = $"Vidas: {amount}";
+            LivesText.text = $"Remaining mistakes: {amount}";
         }
 
+        private void ShowWaveButton()
+        {
+            waveButton.SetActive(true);
+        }
+        
         public void ShowGameOver()
         {
             panelGameOver.SetActive(true);
