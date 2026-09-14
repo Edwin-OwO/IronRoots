@@ -1,24 +1,32 @@
 ﻿using UnityEngine;
 using Economia;
+using System;
+using UnityEngine.EventSystems;
 
 namespace Granja
 {
-    public class FarmSlot : MonoBehaviour
+    [RequireComponent(typeof(Collider2D))]
+    public class FarmSlot : MonoBehaviour, IPointerClickHandler
     {
+        public static event  Action<FarmSlot> OnSlotClicked;
+        
         private CropBase actualCrop;
-
         public bool Taked => actualCrop != null;
 
-        public bool PlantCrop<T>(int cost) where T : CropBase
+        public void OnPointerClick(PointerEventData eventData)
         {
-            if (Taked) return false;
-            if (!EconomyManager.Instance.PayCost(cost)) return false;
+            OnSlotClicked?.Invoke(this);
+        }
+        
+        public void PlantCrop(CropDataSO cropDataSO)
+        {
+            if (Taked) return;
+            if (!EconomyManager.Instance.PayCost(cropDataSO.Cost)) return;
 
-            actualCrop = gameObject.AddComponent<T>();
+            actualCrop = Instantiate(cropDataSO.Prefab, transform.position, Quaternion.identity, transform);
             EconomyManager.Instance.RegisterEntity(actualCrop);
             EconomyManager.Instance.RegisterPassiveMoney(actualCrop.MoneyPerCycle);
             actualCrop.StartCycle();
-            return true;
         }
         
         public void DestroyCrop()
@@ -28,7 +36,7 @@ namespace Granja
             EconomyManager.Instance.ReducePassiveMoney(actualCrop.MoneyPerCycle);
             EconomyManager.Instance.UnregisterEntity(actualCrop);
 
-            Destroy(actualCrop);
+            Destroy(actualCrop.gameObject);
             actualCrop = null;
         }
     }
