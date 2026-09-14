@@ -5,15 +5,15 @@ namespace Economia
 {
     public class EconomyManager : MonoBehaviour
     {
-        public static event Action<int> OnMoneyChanged; 
+        public static event Action<float> OnMoneyChanged; 
         
         public static EconomyManager Instance { get; private set; }
 
-        [SerializeField] private int money = 100;
+        [SerializeField] private float money = 100;
         
         private int passiveEntryPerTick;
 
-        public int Money => money;
+        public float Money => money;
         public int PassiveEntryPerTick => passiveEntryPerTick;
         
         private void Awake()
@@ -52,15 +52,15 @@ namespace Economia
                 AddMoney(passiveEntryPerTick);
         }
 
-        public void AddMoney(int amount)
+        public void AddMoney(float amount)
         {
             money += amount;
             OnMoneyChanged?.Invoke(money);
         }
 
-        public bool CanBuy(int cost) => money >= cost;
+        public bool CanBuy(float cost) => money >= cost;
 
-        public bool PayCost(int cost)
+        public bool PayCost(float cost)
         {
             if (!CanBuy(cost)) return false;
             money -= cost;

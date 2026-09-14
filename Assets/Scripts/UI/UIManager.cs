@@ -27,7 +27,7 @@ namespace UI
                 FarmBase.OnEnemieEnter -= UpdateLife;
         }
 
-        public void UpdateMoney(int amount)
+        public void UpdateMoney(float amount)
         {
             MoneyText.text = $"$ {amount}";
         }

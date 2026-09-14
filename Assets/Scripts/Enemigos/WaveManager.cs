@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Economia;
 using Nucleo;
 using UnityEngine;
 
@@ -56,6 +57,7 @@ namespace Enemigos
             enemy.Initialize(principalPath);
             enemy.OnEnemyDied += OnDie;
             enemy.OnEnemyReachedEnd += OnFinalStep;
+            EconomyManager.Instance.RegisterEntity(enemy);
             remainEnemies++;
         }
 
@@ -72,6 +74,7 @@ namespace Enemigos
             remainEnemies--;
             ChekWaveEnd();
             enemy.OnEnemyReachedEnd -= OnFinalStep;
+            EconomyManager.Instance.UnregisterEntity(enemy);
         }
 
         private void ChekWaveEnd()

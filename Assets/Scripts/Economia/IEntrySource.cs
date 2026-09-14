@@ -2,6 +2,6 @@
 {
     public interface IEntrySource
     {
-        event System.Action<int> OnEntryGenerated;
+        event System.Action<float> OnEntryGenerated;
     }
 }

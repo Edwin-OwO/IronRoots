@@ -15,10 +15,9 @@ namespace Enemigos
         private Path path;
         private int actualIndexWeapon;
         private float zposition;
-        private readonly List<IEnemyObserver> observers = new List<IEnemyObserver>();
 
         public int Damage => damage;
-        public event Action<int> OnEntryGenerated;
+        public event Action<float> OnEntryGenerated;
         public event Action<Enemy> OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
         

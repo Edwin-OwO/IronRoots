@@ -9,7 +9,7 @@ namespace Granja
         [SerializeField] protected CropData data; 
        
         public int MoneyPerCycle => data.MoneyPerCycle;
-        public event Action<int> OnEntryGenerated;
+        public event Action<float> OnEntryGenerated;
         public virtual void StartCycle()
         {
             InvokeRepeating(nameof(Harvest), data.TimePerCycle, data.TimePerCycle);

@@ -19,14 +19,14 @@ namespace Torretas
         [SerializeField] private GameObject proyectilePrefab;
         [SerializeField] private Transform shootPoint;
         
-        private float timeBetweenShots;
+        private float timeBetweenShots = 2f;
         
         public int Level => level;
         public float Range => range;
         public float Damage => damage;
         public float FireRate => fireRate;
 
-        public int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
+        private int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
 
         private void Update()
         {
@@ -62,23 +62,21 @@ namespace Torretas
         
         private void Shoot(Enemy objective)
         {
-            Vector3 origin = shootPoint != null? shootPoint.position : transform.position;
+            Vector3 origin = shootPoint.transform.position;
             GameObject ProjectileGO = Instantiate(proyectilePrefab, origin, Quaternion.identity);
             Proyectile proyectile = ProjectileGO.GetComponent<Proyectile>();
             proyectile.Initialize(objective, damage);
         }
         
-        public bool Upgrade()
+        public void Upgrade()
         {
             int costo = ActualUpgradeCost;
-            if (!EconomyManager.Instance.PayCost(costo)) return false;
+            if (!EconomyManager.Instance.PayCost(costo)) return;
 
             level++;
             range *= 1.15f;
             damage *= 1.25f;
             fireRate *= 0.9f; 
-
-            return true;
         }
 
         private void OnDrawGizmosSelected()

@@ -43,6 +43,7 @@ namespace Nucleo
            if (health <= 0) 
            {
              Debug.Log("Game Over: la base fue destruida."); 
+             OnBaseDestroyed?.Invoke();
            }
       }
     }
