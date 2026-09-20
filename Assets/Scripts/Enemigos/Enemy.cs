@@ -10,13 +10,11 @@ namespace Enemigos
         [SerializeField] private float health = 10f;
         [SerializeField] private float velocity = 2f;
         [SerializeField] private int bounty = 5;
-        [SerializeField] private int damage = 1;
 
         private Path path;
-        private int actualIndexWeapon;
+        private int actualIndexWaypoint;
         private float zposition;
-
-        public int Damage => damage;
+        
         public event Action<float> OnEntryGenerated;
         public event Action<Enemy> OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
@@ -24,7 +22,7 @@ namespace Enemigos
         public void Initialize(Path path)
         {
             this.path = path;
-            actualIndexWeapon = 0;
+            actualIndexWaypoint = 0;
             zposition = transform.position.z;
         }
 
@@ -37,14 +35,14 @@ namespace Enemigos
         {
             if (path == null) return;
             Vector2 actualPosition = transform.position;
-            Vector2 objetive = path.GetWaypoint(actualIndexWeapon);
+            Vector2 objetive = path.GetWaypoint(actualIndexWaypoint);
             Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
             transform.position = new Vector3(newPosition.x, newPosition.y, zposition);
             
             if (Vector2.Distance(transform.position, objetive) < 0.05f)
             {
-                actualIndexWeapon++;
-                if (actualIndexWeapon >= path.AmountOfWaypoints)
+                actualIndexWaypoint++;
+                if (actualIndexWaypoint >= path.AmountOfWaypoints)
                 {
                     OnEndStep();
                 }

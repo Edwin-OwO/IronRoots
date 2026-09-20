@@ -24,12 +24,11 @@ namespace Torretas
             Debug.Log("uwu");
         }
 
-        public void BuildTurret(IConstructionStrategy strategy)
+        public void BuildTurret(TurretStrategy strategy)
         {
             if (taked) return;
             if (strategy == null) return;
-           if (!EconomyManager.Instance.CanBuy(strategy.Cost)) return;
-            EconomyManager.Instance.PayCost(strategy.Cost);
+            if (!EconomyManager.Instance.PayCost(strategy.Cost)) return;
             actualTurretCost = strategy.Cost;
             actualTurret = strategy.Build(transform.position, transform);
             taked = true;

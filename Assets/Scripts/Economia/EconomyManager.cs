@@ -14,7 +14,6 @@ namespace Economia
         private int passiveEntryPerTick;
 
         public float Money => money;
-        public int PassiveEntryPerTick => passiveEntryPerTick;
         
         private void Awake()
         {
@@ -36,29 +35,13 @@ namespace Economia
             entry.OnEntryGenerated -= AddMoney;
         }
 
-        public void RegisterPassiveMoney(int amount)
-        {
-            passiveEntryPerTick += amount;
-        }
-
-        public void ReducePassiveMoney(int amount)
-        {
-            passiveEntryPerTick = Mathf.Max(0, passiveEntryPerTick - amount);
-        }
-        
-        public void PassiveEntryOnTick()
-        {
-            if (passiveEntryPerTick > 0)
-                AddMoney(passiveEntryPerTick);
-        }
-
         public void AddMoney(float amount)
         {
             money += amount;
             OnMoneyChanged?.Invoke(money);
         }
 
-        public bool CanBuy(float cost) => money >= cost;
+        private bool CanBuy(float cost) => money >= cost;
 
         public bool PayCost(float cost)
         {

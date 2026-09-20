@@ -13,7 +13,7 @@ namespace Torretas
         [SerializeField] private GameObject actionMenuPanel; 
         
         [Header("Turrets")]
-        [SerializeField] private ScriptableObject defaultStrategyAsset; 
+        [SerializeField] private TurretStrategy defaultStrategyAsset; 
         [SerializeField] private float sellPorcentage = 0.50f;
         
         private BuildSlot selectedSlot;
@@ -45,7 +45,7 @@ namespace Torretas
         public void OnBuildBasicTurretPressed()
         {
             if(selectedSlot != null) 
-                selectedSlot.BuildTurret(defaultStrategyAsset as IConstructionStrategy);
+                selectedSlot.BuildTurret(defaultStrategyAsset);
         
             buildMenuPanel.SetActive(false);
         }

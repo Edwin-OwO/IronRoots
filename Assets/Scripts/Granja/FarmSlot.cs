@@ -25,15 +25,13 @@ namespace Granja
 
             actualCrop = Instantiate(cropDataSO.Prefab, transform.position, Quaternion.identity, transform);
             EconomyManager.Instance.RegisterEntity(actualCrop);
-            EconomyManager.Instance.RegisterPassiveMoney(actualCrop.MoneyPerCycle);
             actualCrop.StartCycle();
         }
         
         public void DestroyCrop()
         {
             if (!Taked) return;
-
-            EconomyManager.Instance.ReducePassiveMoney(actualCrop.MoneyPerCycle);
+            
             EconomyManager.Instance.UnregisterEntity(actualCrop);
 
             Destroy(actualCrop.gameObject);

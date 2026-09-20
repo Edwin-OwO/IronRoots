@@ -8,23 +8,23 @@ namespace Torretas
         [SerializeField] private float velocity = 8f;
         [SerializeField] private float distanceBetweenImpact = 0.1f;
 
-        private Enemy Objective;
+        private Enemy objective;
         private float damage;
         private float zPosition;
         
         public void Initialize( Enemy ObjectiveAssigned, float damageAssigned)
         {
-            Objective = ObjectiveAssigned;
+            objective = ObjectiveAssigned;
             damage = damageAssigned;
             zPosition = transform.position.z;
         }
 
         private void Update()
         {
-            if (Objective == null) return;
+            if (objective == null) return;
             
             Vector2 actualPosition = transform.position;
-            Vector2 objectivePosition = Objective.transform.position;
+            Vector2 objectivePosition = objective.transform.position;
             Vector2 newPosition = Vector2.MoveTowards(actualPosition, objectivePosition, velocity*Time.deltaTime);
             
             transform.position = new Vector3(newPosition.x, newPosition.y, zPosition);
@@ -37,7 +37,7 @@ namespace Torretas
 
         private void ObjectiveImpact()
         {
-            Objective.TakeDamage(damage);
+            objective.TakeDamage(damage);
             Destroy(gameObject);
         }
         
