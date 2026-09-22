@@ -1,7 +1,7 @@
 using Granja;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Crop", menuName = "Scriptable Objects/CropData")]
+[CreateAssetMenu(fileName = "New Crop", menuName = "Scriptable Objects/CropDataSO")]
 public class CropDataSO : ScriptableObject
 {
     [SerializeField] private CropBase cropPrefab;
