@@ -21,7 +21,6 @@ namespace Torretas
         public void OnPointerClick(PointerEventData eventData)
         {
             OnSlotClicked?.Invoke(this);
-            Debug.Log("uwu");
         }
 
         public void BuildTurret(TurretStrategy strategy)

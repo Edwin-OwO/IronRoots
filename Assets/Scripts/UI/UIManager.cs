@@ -17,14 +17,14 @@ namespace UI
         {
             EconomyManager.OnMoneyChanged += UpdateMoney;
             WaveManager.OnWaveEnd += ShowWaveButton;
-            FarmBase.OnEnemieEnter += UpdateLife;
+            FarmBase.OnEnemyEnter += UpdateLife;
         }
 
         private void OnDisable()
         {
                 EconomyManager.OnMoneyChanged -= UpdateMoney;
                 WaveManager.OnWaveEnd -= ShowWaveButton;
-                FarmBase.OnEnemieEnter -= UpdateLife;
+                FarmBase.OnEnemyEnter -= UpdateLife;
         }
 
         public void UpdateMoney(float amount)

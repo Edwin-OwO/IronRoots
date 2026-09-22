@@ -7,15 +7,14 @@ namespace Granja
     public class CropBase : MonoBehaviour, ICrop, IEntrySource
     { 
         [SerializeField] protected CropData data; 
-       
-        public int MoneyPerCycle => data.MoneyPerCycle;
+        
         public event Action<float> OnEntryGenerated;
-        public virtual void StartCycle()
+        public void StartCycle()
         {
             InvokeRepeating(nameof(Harvest), data.TimePerCycle, data.TimePerCycle);
         }
 
-        public virtual void Harvest()
+        public void Harvest()
         {
             OnEntryGenerated?.Invoke(data.MoneyPerCycle);
         }

@@ -9,7 +9,7 @@ namespace Nucleo
     public class FarmBase : MonoBehaviour
     {
         public static event  Action OnBaseDestroyed;
-        public static event Action<int> OnEnemieEnter;
+        public static event Action<int> OnEnemyEnter;
        
         public static FarmBase Instance { get; private set; }
         
@@ -31,7 +31,7 @@ namespace Nucleo
        public void TakeDamage()
       {
          health  -= 1;
-         OnEnemieEnter?.Invoke(health);
+         OnEnemyEnter?.Invoke(health);
          
             List<FarmSlot> slotsTaked = farmSlots.FindAll(slot => slot.Taked);
            if (slotsTaked.Count > 0)
