@@ -10,8 +10,6 @@ namespace Economia
         public static EconomyManager Instance { get; private set; }
 
         [SerializeField] private float money = 100;
-        
-        private int passiveEntryPerTick;
 
         public float Money => money;
         

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using Economia;
 using UnityEngine;
@@ -13,7 +13,6 @@ namespace Enemigos
 
         private Path path;
         private int actualIndexWaypoint;
-        private float zposition;
         
         public event Action<float> OnEntryGenerated;
         public event Action<Enemy> OnEnemyDied;
@@ -23,7 +22,6 @@ namespace Enemigos
         {
             this.path = path;
             actualIndexWaypoint = 0;
-            zposition = transform.position.z;
         }
 
         private void Update()
@@ -37,9 +35,8 @@ namespace Enemigos
             Vector2 actualPosition = transform.position;
             Vector2 objetive = path.GetWaypoint(actualIndexWaypoint);
             Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
-            transform.position = new Vector3(newPosition.x, newPosition.y, zposition);
             
-            if (Vector2.Distance(transform.position, objetive) < 0.05f)
+            if (Vector2.Distance(newPosition, objetive) < 0.05f)
             {
                 actualIndexWaypoint++;
                 if (actualIndexWaypoint >= path.AmountOfWaypoints)
