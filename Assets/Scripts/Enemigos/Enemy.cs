@@ -35,8 +35,8 @@ namespace Enemigos
             Vector2 actualPosition = transform.position;
             Vector2 objetive = path.GetWaypoint(actualIndexWaypoint);
             Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
-            
-            if (Vector2.Distance(newPosition, objetive) < 0.05f)
+            transform.position = new Vector3(newPosition.x, newPosition.y);
+            if (Vector2.Distance(transform.position, objetive) < 0.05f)
             {
                 actualIndexWaypoint++;
                 if (actualIndexWaypoint >= path.AmountOfWaypoints)

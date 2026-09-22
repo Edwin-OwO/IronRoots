@@ -24,7 +24,7 @@ namespace Torretas
             Vector2 actualPosition = transform.position;
             Vector2 objectivePosition = objective.transform.position;
             Vector2 newPosition = Vector2.MoveTowards(actualPosition, objectivePosition, velocity*Time.deltaTime);
-            
+            transform.position = new Vector3(newPosition.x, newPosition.y);
             if (Vector2.Distance(newPosition, objectivePosition) <= distanceBetweenImpact)
             {
                 ObjectiveImpact();
