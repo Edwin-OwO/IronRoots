@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -6801472839904091144, guid: 7efd6a3d28c89d84faad22673ba53931, type: 3}
   m_Color: {r: 0, g: 0.78307223, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Torretas.Turret
   level: 1
-  range: 3
+  range: 6
   damage: 5
   fireRate: 1
   baseUpgradeCost: 30
