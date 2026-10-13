@@ -29,11 +29,13 @@ namespace Nucleo
         private void OnEnable()
         {
             FarmBase.OnBaseDestroyed +=  GameOver;
+            WaveManager.OnWaveEnd += UpdateGameActive;
         }
 
         private void OnDisable()
         {
             FarmBase.OnBaseDestroyed -= GameOver;
+            WaveManager.OnWaveEnd -= UpdateGameActive;
         }
 
         private void Start()
@@ -41,6 +43,11 @@ namespace Nucleo
             StartGame();
         }
 
+        private void UpdateGameActive()
+        {
+            GameActive = !GameActive;
+        }
+        
         public void StartGame()
         {
             GameActive = true;

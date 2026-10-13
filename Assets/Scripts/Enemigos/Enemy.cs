@@ -10,7 +10,8 @@ namespace Enemigos
         [SerializeField] private float health = 10f;
         [SerializeField] private float velocity = 2f;
         [SerializeField] private int bounty = 5;
-
+        [SerializeField] private ParticleSystem attackParticles;
+        
         private Path path;
         private int actualIndexWaypoint;
         
@@ -49,6 +50,7 @@ namespace Enemigos
         public void TakeDamage(float amount)
         {
             health -= amount;
+            CreateAttackParticles();
             if (health <= 0f)
             {
                 Die();
@@ -66,6 +68,11 @@ namespace Enemigos
         {
             OnEnemyReachedEnd?.Invoke(this);
             Destroy(gameObject);
+        }
+
+        private void CreateAttackParticles()
+        {
+            attackParticles.Play();
         }
     }
 }

@@ -23,12 +23,18 @@ namespace Enemigos
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private FarmBase farmBase;
 
+        private EnemyFactory enemyFactory;
         private int actualWave = -1;
         private int remainEnemies;
 
         public bool waveOnGoing => remainEnemies > 0; 
         public int ActualWave => actualWave;
-        
+
+        private void Awake()
+        {
+            enemyFactory = new EnemyFactory();
+        }
+
         public void StartNextWave()
         {
             actualWave++;
@@ -52,9 +58,9 @@ namespace Enemigos
 
         private void SpawnEnemy(GameObject prefab)
         {
-            GameObject instance = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-            Enemy enemy = instance.GetComponent<Enemy>();
-            enemy.Initialize(principalPath);
+            Enemy enemy = enemyFactory.CreateEnemy(prefab, spawnPoint.position, principalPath);
+            if (enemy == null) return;
+            
             enemy.OnEnemyDied += OnDie;
             enemy.OnEnemyReachedEnd += OnFinalStep;
             EconomyManager.Instance.RegisterEntity(enemy);

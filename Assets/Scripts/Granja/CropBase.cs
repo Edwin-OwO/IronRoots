@@ -1,5 +1,6 @@
 ﻿using System;
 using Economia;
+using Nucleo;
 using UnityEngine;
 
 namespace Granja
@@ -16,6 +17,8 @@ namespace Granja
 
         public void Harvest()
         {
+            if(!GameManager.Instance.GameActive) return;
+            
             OnEntryGenerated?.Invoke(data.MoneyPerCycle);
         }
 
