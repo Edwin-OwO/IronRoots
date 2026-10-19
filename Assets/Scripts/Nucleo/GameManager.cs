@@ -9,7 +9,10 @@ namespace Nucleo
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
-        
+
+        public static event Action OnStartGame;
+        public static event Action OnGameOver; 
+         
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private UIManager uiManager;
         [SerializeField] private EconomyManager economyManager;
@@ -40,26 +43,18 @@ namespace Nucleo
 
         private void Start()
         {
-            StartGame();
+            OnStartGame?.Invoke();
         }
 
         private void UpdateGameActive()
         {
             GameActive = !GameActive;
         }
-        
-        public void StartGame()
-        {
-            GameActive = true;
-            uiManager.UpdateMoney(economyManager.Money);
-            uiManager.UpdateLife(FarmBase.Instance.Health);
-            waveManager.StartNextWave();
-        }
 
         private void GameOver()
         {
             GameActive = false;
-            uiManager.ShowGameOver();
+            OnGameOver?.Invoke();
         }
     }
 }

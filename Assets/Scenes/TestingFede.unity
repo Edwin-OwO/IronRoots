@@ -575,7 +575,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -153649999
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5722,6 +5722,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.000015259}
   m_SizeDelta: {x: 377.9794, y: 159.8068}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &465312699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123058479135467399, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+  m_PrefabInstance: {fileID: 1444348627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd44d21324b14e64a30d9f72e21bb689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.FarmSlot
 --- !u!1 &594838648
 GameObject:
   m_ObjectHideFlags: 0
@@ -6289,7 +6300,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nucleo.FarmBase
   health: 20
-  farmSlots: []
+  farmSlots:
+  - {fileID: 1527553785}
+  - {fileID: 1073604176}
+  - {fileID: 1708294484}
+  - {fileID: 465312699}
+  - {fileID: 1204058659}
 --- !u!212 &1020113655
 SpriteRenderer:
   serializedVersion: 2
@@ -6400,6 +6416,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 6.8}
   m_SizeDelta: {x: 242.4323, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1073604176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123058479135467399, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+  m_PrefabInstance: {fileID: 923733799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd44d21324b14e64a30d9f72e21bb689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.FarmSlot
 --- !u!1 &1099213700
 GameObject:
   m_ObjectHideFlags: 0
@@ -6675,7 +6702,7 @@ MonoBehaviour:
   offset: {x: 0, y: 100}
   buildMenuPanel: {fileID: 1711872356}
   actionMenuPanel: {fileID: 411715443}
-  defaultStrategyAsset: {fileID: 11400000, guid: bc24372e99386494095a8113347cc6aa, type: 2}
+  defaultSoAsset: {fileID: 11400000, guid: bc24372e99386494095a8113347cc6aa, type: 2}
   sellPorcentage: 0.25
 --- !u!114 &1100700827
 MonoBehaviour:
@@ -6693,7 +6720,7 @@ MonoBehaviour:
   offset: {x: 0, y: 100}
   plantMenuPanel: {fileID: 1039428907}
   actionMenuPanel: {fileID: 1427557509}
-  cropDataSO: {fileID: 11400000, guid: 769f3502515a99b4db72de806e5256bb, type: 2}
+  cropDataSO: {fileID: 11400000, guid: d527fb34b640fd04d87899abb8499abb, type: 2}
 --- !u!1 &1133889007
 GameObject:
   m_ObjectHideFlags: 0
@@ -7045,6 +7072,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1204058659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123058479135467399, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+  m_PrefabInstance: {fileID: 875297370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd44d21324b14e64a30d9f72e21bb689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.FarmSlot
 --- !u!1 &1204976439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7944,6 +7982,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+--- !u!114 &1527553785 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123058479135467399, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+  m_PrefabInstance: {fileID: 7577121334318469063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd44d21324b14e64a30d9f72e21bb689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.FarmSlot
 --- !u!1 &1592126708
 GameObject:
   m_ObjectHideFlags: 0
@@ -8038,6 +8087,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90089c5fd28c6b443bb57f18c926d4fc, type: 3}
+--- !u!114 &1708294484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123058479135467399, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
+  m_PrefabInstance: {fileID: 1900909099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd44d21324b14e64a30d9f72e21bb689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.FarmSlot
 --- !u!1 &1711872356
 GameObject:
   m_ObjectHideFlags: 0

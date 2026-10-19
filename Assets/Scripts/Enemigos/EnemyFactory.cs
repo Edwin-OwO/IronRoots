@@ -4,10 +4,10 @@ namespace Enemigos
 {
     public class EnemyFactory
     {
-        public Enemy CreateEnemy(GameObject prefab, Vector3 position, Path path)
+        public Enemy CreateEnemy(Enemy prefab, Vector3 position, Path path)
         {
-            GameObject instance = Object.Instantiate(prefab, position, Quaternion.identity);
-            Enemy enemy = instance.GetComponent<Enemy>();
+            Enemy instance = Object.Instantiate(prefab, position, Quaternion.identity);
+            var enemy = instance.GetComponent<Enemy>();
 
             if (enemy != null)
             {

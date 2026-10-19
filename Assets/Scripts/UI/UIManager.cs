@@ -18,15 +18,25 @@ namespace UI
             EconomyManager.OnMoneyChanged += UpdateMoney;
             WaveManager.OnWaveEnd += ShowWaveButton;
             FarmBase.OnEnemyEnter += UpdateLife;
+            GameManager.OnStartGame +=  OnStartGame;
+            GameManager.OnGameOver += ShowGameOver;
         }
-
+        
         private void OnDisable()
         {
                 EconomyManager.OnMoneyChanged -= UpdateMoney;
                 WaveManager.OnWaveEnd -= ShowWaveButton;
                 FarmBase.OnEnemyEnter -= UpdateLife;
+                GameManager.OnStartGame -=  OnStartGame;
+                GameManager.OnGameOver -= ShowGameOver;
         }
 
+        private void OnStartGame()
+        {
+            UpdateMoney(EconomyManager.Instance.Money);
+            UpdateLife(FarmBase.Instance.Health);
+        }
+        
         public void UpdateMoney(float amount)
         {
             MoneyText.text = $"$ {amount}";

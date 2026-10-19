@@ -23,6 +23,7 @@ namespace Enemigos
         {
             this.path = path;
             actualIndexWaypoint = 0;
+            EconomyManager.Instance.RegisterEntity(this);
         }
 
         private void Update()
@@ -61,18 +62,25 @@ namespace Enemigos
         {
             OnEntryGenerated?.Invoke(bounty);
             OnEnemyDied?.Invoke(this);
+            Unregister();
             Destroy(gameObject);
         }
 
         private void OnEndStep()
         {
             OnEnemyReachedEnd?.Invoke(this);
+            Unregister();
             Destroy(gameObject);
         }
 
         private void CreateAttackParticles()
         {
             attackParticles.Play();
+        }
+
+        private void Unregister()
+        {
+            EconomyManager.Instance.UnregisterEntity(this);
         }
     }
 }

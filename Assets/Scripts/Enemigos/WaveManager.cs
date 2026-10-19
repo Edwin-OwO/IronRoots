@@ -10,7 +10,7 @@ namespace Enemigos
     [System.Serializable]
     public class WaveData
     {
-        public GameObject enemyPrefab;
+        public Enemy enemyPrefab;
         public int amount;
         public float timeBetweenSpawns = 0.5f;
     }
@@ -35,7 +35,17 @@ namespace Enemigos
             enemyFactory = new EnemyFactory();
         }
 
-        public void StartNextWave()
+        private void OnEnable()
+        {
+            GameManager.OnStartGame += OnStartNextWave;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnStartGame -= OnStartNextWave;
+        }
+
+        public void OnStartNextWave()
         {
             actualWave++;
             if (actualWave >= waves.Count)
@@ -56,14 +66,13 @@ namespace Enemigos
             }
         }
 
-        private void SpawnEnemy(GameObject prefab)
+        private void SpawnEnemy(Enemy prefab)
         {
             Enemy enemy = enemyFactory.CreateEnemy(prefab, spawnPoint.position, principalPath);
             if (enemy == null) return;
             
             enemy.OnEnemyDied += OnDie;
             enemy.OnEnemyReachedEnd += OnFinalStep;
-            EconomyManager.Instance.RegisterEntity(enemy);
             remainEnemies++;
         }
 
@@ -80,7 +89,6 @@ namespace Enemigos
             remainEnemies--;
             ChekWaveEnd();
             enemy.OnEnemyReachedEnd -= OnFinalStep;
-            EconomyManager.Instance.UnregisterEntity(enemy);
         }
 
         private void ChekWaveEnd()
