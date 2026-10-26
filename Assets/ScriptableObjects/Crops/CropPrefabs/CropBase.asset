@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2045c50c7d1e3c4391c832328b5adc7, type: 3}
   m_Name: CropBase
   m_EditorClassIdentifier: Assembly-CSharp::CropPrefab
-  cropPrefab: {fileID: 4897051064679867179, guid: 3e3271ae4f92ee4409044253e30dc655, type: 3}
+  cropPrefab: {fileID: 0}
   cost: 15
+  cropName: Basic Crop
+  cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
+  aviableUpgrades:
+  - {fileID: 11400000}

@@ -1,66 +1,91 @@
-﻿using UnityEngine;
+﻿using UI;
+using UnityEngine;
 
 namespace Granja
 {
     public class FarmMenuUI : MonoBehaviour
 
-    { 
-        [Header("Referencias UI")]
-        [SerializeField] private RectTransform menuRectTransform;
-        [SerializeField] private Vector2 offset = new Vector2(0, 100f); 
-        
-        [Header("Paneles de Botones")]
-        [SerializeField] private GameObject plantMenuPanel; 
-        [SerializeField] private GameObject actionMenuPanel;
-        
-       [Header("Configuración de Cultivos")]
-       [SerializeField] private CropDataSO cropDataSO;
+    {
+        [Header("Referencias UI")] [SerializeField]
+        private RectTransform menuRectTransform;
 
-       private FarmSlot selectedSlot;
-       private Camera mainCam;
+        [SerializeField] private Vector2 offset = new Vector2(0, 100f);
 
-      private void Awake()
+        [Header("Contenedor Dinamico")] [SerializeField]
+        private Transform optionsContainer;
+
+        [SerializeField] private CropOptionButton optionButtonPrefab;
+
+        [Header("Cultivo Inicial")] [SerializeField]
+        private CropDataSO basicCropData;
+
+        private FarmSlot selectedSlot;
+        private Camera mainCam;
+
+        private void Awake()
         {
-            mainCam = Camera.main; 
+            mainCam = Camera.main;
         }
 
-      private void OnEnable() => FarmSlot.OnSlotClicked += ShowMenu; 
-      private void OnDisable() => FarmSlot.OnSlotClicked -= ShowMenu;
+        private void OnEnable() => FarmSlot.OnSlotClicked += ShowMenu;
+        private void OnDisable() => FarmSlot.OnSlotClicked -= ShowMenu;
 
         private void ShowMenu(FarmSlot slot)
         {
             selectedSlot = slot;
 
             if (mainCam == null) return;
-            
+
             Vector3 screenPos = mainCam.WorldToScreenPoint(slot.transform.position);
             screenPos.x += offset.x;
-            screenPos.y += offset.y; 
-
+            screenPos.y += offset.y;
             menuRectTransform.position = screenPos;
-            
-            plantMenuPanel.SetActive(!slot.Taked);
-            actionMenuPanel.SetActive(slot.Taked);
-        }
-        
-        public void OnPlantPressed()
-        {
-            if(selectedSlot != null && cropDataSO != null) 
+
+            ClearOptions();
+
+            if (!slot.Taked)
             {
-                selectedSlot.PlantCrop(cropDataSO);
+                CreateOptionButton(basicCropData, () =>
+                {
+                    selectedSlot.SetCrop(basicCropData);
+                    gameObject.SetActive(false);
+                });
             }
-        
-            plantMenuPanel.SetActive(false); 
-        }
-        
-        public void OnDestroyCropPressed()
-        {
-            if (selectedSlot != null)
+            else
             {
-                selectedSlot.DestroyCrop(); 
+                CropDataSO currentData = slot.CropData;
+
+                if (currentData != null && currentData.Upgrades != null)
+                {
+                    foreach (var upgradeData in currentData.Upgrades)
+                    {
+                        CropDataSO targetUpgrade = upgradeData;
+                        CreateOptionButton(targetUpgrade, () =>
+                        {
+                            selectedSlot.SetCrop(targetUpgrade);
+                            gameObject.SetActive(false);
+                        });
+                    }
+                }
             }
-            
-            actionMenuPanel.SetActive(false); 
+
+            gameObject.SetActive(true);
         }
+
+        private void CreateOptionButton(CropDataSO cropData, System.Action onClickAction)
+        {
+            if (cropData == null || optionButtonPrefab == null) return;
+
+            CropOptionButton btn = Instantiate(optionButtonPrefab, optionsContainer);
+            btn.Setup(cropData, onClickAction);
         }
+
+        private void ClearOptions()
+        {
+            foreach (Transform child in optionsContainer)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 }

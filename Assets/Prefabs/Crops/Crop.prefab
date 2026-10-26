@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8560202754355071154}
   - component: {fileID: 6057088045991007288}
-  - component: {fileID: 4897051064679867179}
+  - component: {fileID: 3123015471822271916}
   m_Layer: 6
   m_Name: Crop
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4897051064679867179
+--- !u!114 &3123015471822271916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7081211597971081708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31d8bbb58f14bb3b6b4d0315b1eb1e1, type: 3}
+  m_Script: {fileID: 11500000, guid: f1dbf831eba74873a6beef58ec3cae62, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Granja.CropBase
+  m_EditorClassIdentifier: Assembly-CSharp::Granja.BasicCrop
   data: {fileID: 11400000, guid: aff5e1785dbbb7442ae9277b2b547470, type: 2}
