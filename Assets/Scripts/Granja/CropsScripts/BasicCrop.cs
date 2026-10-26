@@ -4,7 +4,7 @@
     {
         protected override void PlantAbility()
         {
-            throw new System.NotImplementedException();
+            //uwu
         }
     }
 }

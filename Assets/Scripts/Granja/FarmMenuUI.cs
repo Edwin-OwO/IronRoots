@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace Granja
@@ -6,13 +7,13 @@ namespace Granja
     public class FarmMenuUI : MonoBehaviour
 
     {
-        [Header("Referencias UI")] [SerializeField]
-        private RectTransform menuRectTransform;
+        [Header("Referencias UI")] 
+        [SerializeField] private GameObject menu;
 
         [SerializeField] private Vector2 offset = new Vector2(0, 100f);
 
-        [Header("Contenedor Dinamico")] [SerializeField]
-        private Transform optionsContainer;
+        [Header("Contenedor Dinamico")] 
+        [SerializeField] private Transform optionsContainer;
 
         [SerializeField] private CropOptionButton optionButtonPrefab;
 
@@ -39,37 +40,41 @@ namespace Granja
             Vector3 screenPos = mainCam.WorldToScreenPoint(slot.transform.position);
             screenPos.x += offset.x;
             screenPos.y += offset.y;
-            menuRectTransform.position = screenPos;
+            menu.transform.position = screenPos;
 
             ClearOptions();
 
+// 3. Obtener la lista de opciones a mostrar
+            List<CropDataSO> optionsToDisplay = new List<CropDataSO>();
+
             if (!slot.Taked)
             {
-                CreateOptionButton(basicCropData, () =>
-                {
-                    selectedSlot.SetCrop(basicCropData);
-                    gameObject.SetActive(false);
-                });
+                // Si el slot está vacío, ofrecemos la planta básica inicial
+                if (basicCropData != null)
+                    optionsToDisplay.Add(basicCropData);
             }
             else
             {
-                CropDataSO currentData = slot.CropData;
-
-                if (currentData != null && currentData.Upgrades != null)
+                // Si ya está ocupado, cargamos las evoluciones/subtipos configurados en la planta actual
+                if (slot.CropData != null && slot.CropData.Upgrades != null)
                 {
-                    foreach (var upgradeData in currentData.Upgrades)
-                    {
-                        CropDataSO targetUpgrade = upgradeData;
-                        CreateOptionButton(targetUpgrade, () =>
-                        {
-                            selectedSlot.SetCrop(targetUpgrade);
-                            gameObject.SetActive(false);
-                        });
-                    }
+                    optionsToDisplay = slot.CropData.Upgrades;
                 }
             }
 
-            gameObject.SetActive(true);
+            // 4. Instanciar dinámicamente un botón por cada opción disponible
+            foreach (var optionData in optionsToDisplay)
+            {
+                CropDataSO targetData = optionData;
+                CreateOptionButton(targetData, () => 
+                {
+                    selectedSlot.SetCrop(targetData);
+                    menu.SetActive(false); // Ocultar menú tras la selección
+                });
+            }
+
+            // Asegurarnos de que el menú completo sea visible
+            menu.SetActive(true);
         }
 
         private void CreateOptionButton(CropDataSO cropData, System.Action onClickAction)

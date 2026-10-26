@@ -37,12 +37,12 @@ namespace UI
             UpdateLife(FarmBase.Instance.Health);
         }
         
-        public void UpdateMoney(float amount)
+        private void UpdateMoney(float amount)
         {
             MoneyText.text = $"$ {amount}";
         }
 
-        public void UpdateLife(int amount)
+        private void UpdateLife(int amount)
         {
             LivesText.text = $"Remaining mistakes: {amount}";
         }
@@ -52,7 +52,7 @@ namespace UI
             waveButton.SetActive(true);
         }
         
-        public void ShowGameOver()
+        private void ShowGameOver()
         {
             panelGameOver.SetActive(true);
         }
