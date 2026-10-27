@@ -23,13 +23,13 @@ namespace Torretas
             OnSlotClicked?.Invoke(this);
         }
 
-        public void BuildTurret(TurretStrategy strategy)
+        public void BuildTurret(TurretSO so)
         {
             if (taked) return;
-            if (strategy == null) return;
-            if (!EconomyManager.Instance.PayCost(strategy.Cost)) return;
-            actualTurretCost = strategy.Cost;
-            actualTurret = strategy.Build(transform.position, transform);
+            if (so == null) return;
+            if (!EconomyManager.Instance.PayCost(so.Cost)) return;
+            actualTurretCost = so.Cost;
+            actualTurret = so.Build(transform.position, transform);
             taked = true;
         }
         public void SellTurret(float porcentageToRefund)

@@ -170,6 +170,10 @@ namespace Torretas
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, range);
         }
+        public void AddDamage(float extraDamage)
+        {
+            damage += extraDamage;  
+        }
     }
 }
 

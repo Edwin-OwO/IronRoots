@@ -1,5 +1,4 @@
 ﻿ using System;
-using System.Collections.Generic;
 using Economia;
 using UnityEngine;
 
@@ -10,18 +9,20 @@ namespace Enemigos
         [SerializeField] private float health = 10f;
         [SerializeField] private float velocity = 2f;
         [SerializeField] private int bounty = 5;
-
+        [SerializeField] private ParticleSystem attackParticles;
+        
         private Path path;
         private int actualIndexWaypoint;
         
         public event Action<float> OnEntryGenerated;
-        public event Action<Enemy> OnEnemyDied;
+        public static event Action OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
         
         public void Initialize(Path path)
         {
             this.path = path;
             actualIndexWaypoint = 0;
+            EconomyManager.Instance.RegisterEntity(this);
         }
 
         private void Update()
@@ -49,6 +50,7 @@ namespace Enemigos
         public void TakeDamage(float amount)
         {
             health -= amount;
+            CreateAttackParticles();
             if (health <= 0f)
             {
                 Die();
@@ -58,14 +60,26 @@ namespace Enemigos
         private void Die()
         {
             OnEntryGenerated?.Invoke(bounty);
-            OnEnemyDied?.Invoke(this);
+            OnEnemyDied?.Invoke();
+            Unregister();
             Destroy(gameObject);
         }
 
         private void OnEndStep()
         {
             OnEnemyReachedEnd?.Invoke(this);
+            Unregister();
             Destroy(gameObject);
+        }
+
+        private void CreateAttackParticles()
+        {
+            attackParticles.Play();
+        }
+
+        private void Unregister()
+        {
+            EconomyManager.Instance.UnregisterEntity(this);
         }
     }
 }

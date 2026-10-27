@@ -10,7 +10,7 @@ namespace Enemigos
     [System.Serializable]
     public class WaveData
     {
-        public GameObject enemyPrefab;
+        public Enemy enemyPrefab;
         public int amount;
         public float timeBetweenSpawns = 0.5f;
     }
@@ -23,13 +23,31 @@ namespace Enemigos
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private FarmBase farmBase;
 
+        private EnemyFactory enemyFactory;
         private int actualWave = -1;
         private int remainEnemies;
 
         public bool waveOnGoing => remainEnemies > 0; 
         public int ActualWave => actualWave;
-        
-        public void StartNextWave()
+
+        private void Awake()
+        {
+            enemyFactory = new EnemyFactory();
+        }
+
+        private void OnEnable()
+        {
+            GameManager.OnStartGame += OnStartNextWave;
+            Enemy.OnEnemyDied += OnDie;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnStartGame -= OnStartNextWave;
+            Enemy.OnEnemyDied -= OnDie;
+        }
+
+        public void OnStartNextWave()
         {
             actualWave++;
             if (actualWave >= waves.Count)
@@ -50,22 +68,18 @@ namespace Enemigos
             }
         }
 
-        private void SpawnEnemy(GameObject prefab)
+        private void SpawnEnemy(Enemy prefab)
         {
-            GameObject instance = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-            Enemy enemy = instance.GetComponent<Enemy>();
-            enemy.Initialize(principalPath);
-            enemy.OnEnemyDied += OnDie;
+            Enemy enemy = enemyFactory.CreateEnemy(prefab, spawnPoint.position, principalPath);
+            if (enemy == null) return;
             enemy.OnEnemyReachedEnd += OnFinalStep;
-            EconomyManager.Instance.RegisterEntity(enemy);
             remainEnemies++;
         }
 
-        private void OnDie(Enemy enemy)
+        private void OnDie()
         {
             remainEnemies--;
             ChekWaveEnd();
-            enemy.OnEnemyDied -= OnDie;
         }
 
         private void OnFinalStep(Enemy enemy)
@@ -74,7 +88,6 @@ namespace Enemigos
             remainEnemies--;
             ChekWaveEnd();
             enemy.OnEnemyReachedEnd -= OnFinalStep;
-            EconomyManager.Instance.UnregisterEntity(enemy);
         }
 
         private void ChekWaveEnd()

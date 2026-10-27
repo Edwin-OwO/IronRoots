@@ -1,66 +1,96 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UI;
+using UnityEngine;
 
 namespace Granja
 {
     public class FarmMenuUI : MonoBehaviour
 
-    { 
-        [Header("Referencias UI")]
-        [SerializeField] private RectTransform menuRectTransform;
-        [SerializeField] private Vector2 offset = new Vector2(0, 100f); 
-        
-        [Header("Paneles de Botones")]
-        [SerializeField] private GameObject plantMenuPanel; 
-        [SerializeField] private GameObject actionMenuPanel;
-        
-       [Header("Configuración de Cultivos")]
-       [SerializeField] private CropDataSO cropDataSO;
+    {
+        [Header("Referencias UI")] 
+        [SerializeField] private GameObject menu;
 
-       private FarmSlot selectedSlot;
-       private Camera mainCam;
+        [SerializeField] private Vector2 offset = new Vector2(0, 100f);
 
-      private void Awake()
+        [Header("Contenedor Dinamico")] 
+        [SerializeField] private Transform optionsContainer;
+
+        [SerializeField] private CropOptionButton optionButtonPrefab;
+
+        [Header("Cultivo Inicial")] [SerializeField]
+        private CropDataSO basicCropData;
+
+        private FarmSlot selectedSlot;
+        private Camera mainCam;
+
+        private void Awake()
         {
-            mainCam = Camera.main; 
+            mainCam = Camera.main;
         }
 
-      private void OnEnable() => FarmSlot.OnSlotClicked += ShowMenu; 
-      private void OnDisable() => FarmSlot.OnSlotClicked -= ShowMenu;
+        private void OnEnable() => FarmSlot.OnSlotClicked += ShowMenu;
+        private void OnDisable() => FarmSlot.OnSlotClicked -= ShowMenu;
 
         private void ShowMenu(FarmSlot slot)
         {
             selectedSlot = slot;
 
             if (mainCam == null) return;
-            
+
             Vector3 screenPos = mainCam.WorldToScreenPoint(slot.transform.position);
             screenPos.x += offset.x;
-            screenPos.y += offset.y; 
+            screenPos.y += offset.y;
+            menu.transform.position = screenPos;
 
-            menuRectTransform.position = screenPos;
-            
-            plantMenuPanel.SetActive(!slot.Taked);
-            actionMenuPanel.SetActive(slot.Taked);
-        }
-        
-        public void OnPlantPressed()
-        {
-            if(selectedSlot != null && cropDataSO != null) 
+            ClearOptions();
+
+// 3. Obtener la lista de opciones a mostrar
+            List<CropDataSO> optionsToDisplay = new List<CropDataSO>();
+
+            if (!slot.Taked)
             {
-                selectedSlot.PlantCrop(cropDataSO);
+                // Si el slot está vacío, ofrecemos la planta básica inicial
+                if (basicCropData != null)
+                    optionsToDisplay.Add(basicCropData);
             }
-        
-            plantMenuPanel.SetActive(false); 
-        }
-        
-        public void OnDestroyCropPressed()
-        {
-            if (selectedSlot != null)
+            else
             {
-                selectedSlot.DestroyCrop(); 
+                // Si ya está ocupado, cargamos las evoluciones/subtipos configurados en la planta actual
+                if (slot.CropData != null && slot.CropData.Upgrades != null)
+                {
+                    optionsToDisplay = slot.CropData.Upgrades;
+                }
             }
-            
-            actionMenuPanel.SetActive(false); 
+
+            // 4. Instanciar dinámicamente un botón por cada opción disponible
+            foreach (var optionData in optionsToDisplay)
+            {
+                CropDataSO targetData = optionData;
+                CreateOptionButton(targetData, () => 
+                {
+                    selectedSlot.SetCrop(targetData);
+                    menu.SetActive(false); // Ocultar menú tras la selección
+                });
+            }
+
+            // Asegurarnos de que el menú completo sea visible
+            menu.SetActive(true);
         }
+
+        private void CreateOptionButton(CropDataSO cropData, System.Action onClickAction)
+        {
+            if (cropData == null || optionButtonPrefab == null) return;
+
+            CropOptionButton btn = Instantiate(optionButtonPrefab, optionsContainer);
+            btn.Setup(cropData, onClickAction);
         }
+
+        private void ClearOptions()
+        {
+            foreach (Transform child in optionsContainer)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 }

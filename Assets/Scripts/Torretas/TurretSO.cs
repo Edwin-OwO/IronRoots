@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Torretas
 {
     [CreateAssetMenu(fileName = "TurretStrategy", menuName = "Scriptable Objects/TurretStrategy")]
-    public class TurretStrategy : ScriptableObject
+    public class TurretSO : ScriptableObject
     {
         [SerializeField] private GameObject turretPrefab;
         [SerializeField] private int cost = 50;
