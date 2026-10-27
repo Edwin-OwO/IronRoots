@@ -41,6 +41,9 @@ TagManager:
   - name: Tilemap
     uniqueID: 4141317297
     locked: 0
+  - name: TurretSlots
+    uniqueID: 2783743051
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -3,46 +3,39 @@ using UnityEngine;
 
 namespace Torretas
 {
-    public class Proyectile : MonoBehaviour
+    public class HomingProjectile : Proyectile
     {
-        [SerializeField] private float velocity = 8f;
         [SerializeField] private float distanceBetweenImpact = 0.1f;
         [SerializeField] private float lifetimeAfterLosingTarget = 1.5f;
-
-        private Enemy objective;
-        private float damage;
-
+ 
         private Vector2 lastDirection;
         private bool objectiveLost;
         private float lifetimeTimer;
-
-        public void Initialize(Enemy objectiveAssigned, float damageAssigned)
+ 
+        public override void Initialize(Enemy objectiveAssigned, float damageAssigned)
         {
-            objective = objectiveAssigned;
-            damage = damageAssigned;
+            base.Initialize(objectiveAssigned, damageAssigned);
+            lastDirection = (targetPosition - (Vector2)transform.position).normalized;
         }
-
-        private void Update()
+ 
+        protected override bool Move()
         {
             if (objective == null)
             {
                 MoveStraightAndExpire();
-                return;
+                return false;
             }
-
+ 
             Vector2 actualPosition = transform.position;
             Vector2 objectivePosition = objective.transform.position;
             lastDirection = (objectivePosition - actualPosition).normalized;
-
+ 
             Vector2 newPosition = Vector2.MoveTowards(actualPosition, objectivePosition, velocity * Time.deltaTime);
             transform.position = newPosition;
-
-            if (Vector2.Distance(newPosition, objectivePosition) <= distanceBetweenImpact)
-            {
-                ObjectiveImpact();
-            }
+ 
+            return Vector2.Distance(newPosition, objectivePosition) <= distanceBetweenImpact;
         }
-        
+ 
         private void MoveStraightAndExpire()
         {
             if (!objectiveLost)
@@ -50,22 +43,21 @@ namespace Torretas
                 objectiveLost = true;
                 lifetimeTimer = lifetimeAfterLosingTarget;
             }
-
-            Vector2 avance = lastDirection * velocity * Time.deltaTime;
-            Vector2 nuevaPosicion = (Vector2)transform.position + avance;
-            transform.position = nuevaPosicion;
-
+ 
+            transform.position += (Vector3)(lastDirection * velocity * Time.deltaTime);
+ 
             lifetimeTimer -= Time.deltaTime;
             if (lifetimeTimer <= 0f)
             {
                 Destroy(gameObject);
             }
         }
-
-        private void ObjectiveImpact()
+ 
+        protected override void OnImpact()
         {
             objective.TakeDamage(damage);
-            Destroy(gameObject);
         }
     }
 }
+
+

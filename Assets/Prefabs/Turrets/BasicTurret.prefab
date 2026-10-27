@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6577029306780222381}
   - component: {fileID: 8473895303882903061}
-  - component: {fileID: 3607247095795879064}
+  - component: {fileID: 5243694178675850439}
   m_Layer: 0
   m_Name: BasicTurret
   m_TagString: Untagged
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3607247095795879064
+--- !u!114 &5243694178675850439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,15 +106,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Torretas.Turret
   level: 1
-  range: 6
+  range: 3
   damage: 5
   fireRate: 1
   baseUpgradeCost: 30
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  proyectilePrefab: {fileID: 657930170676416682, guid: 890548aa23186d74ba04f4984ca7cadd, type: 3}
-  shootPoint: {fileID: 6577029306780222381}
+  targetSearchInterval: 0.2
+  idlePollInterval: 0.2
+  firePoint: {fileID: 6889525197547292685}
+  rotatingPart: {fileID: 6577029306780222381}
+  rotationSpeed: 360
+  spriteAngleOffset: 0
+  turretStrategyAsset: {fileID: 11400000, guid: 35ab24a358492d24b9a434ddbf98959a, type: 2}
 --- !u!1 &2218124094258136054
 GameObject:
   m_ObjectHideFlags: 0

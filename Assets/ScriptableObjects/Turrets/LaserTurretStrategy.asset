@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103ecec7c6d458b4dbde364303a4da48, type: 3}
-  m_Name: BasicTurret
+  m_Name: LaserTurretStrategy
   m_EditorClassIdentifier: Assembly-CSharp::Torretas.ProyectileTurretStrategy
-  turretPrefab: {fileID: 1289986895740305400, guid: 8a507442bba93cf428428eececcf6108, type: 3}
-  cost: 50
+  turretPrefab: {fileID: 1289986895740305400, guid: 09cdbc5d4937d784782b0cb6b00eaf4e, type: 3}
+  cost: 100

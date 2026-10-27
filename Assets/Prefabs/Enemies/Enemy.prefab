@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7775eb0d42b6470d9242ccc52fb25b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.Enemy
-  health: 10
-  velocity: 2
+  health: 3
+  velocity: 3
   bounty: 5
   attackParticles: {fileID: 645735987734501516, guid: 8bb60ced312bd4146950771ff5797ac4, type: 3}
 --- !u!58 &-6600170169432354998
