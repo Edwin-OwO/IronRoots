@@ -574,7 +574,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -153649999
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -6675,7 +6675,7 @@ MonoBehaviour:
   offset: {x: 0, y: 100}
   buildMenuPanel: {fileID: 1711872356}
   actionMenuPanel: {fileID: 411715443}
-  defaultStrategyAsset: {fileID: 11400000, guid: bc24372e99386494095a8113347cc6aa, type: 2}
+  defaultStrategyAsset: {fileID: 11400000, guid: a48f85e292fb1364cb33b57403d8299c, type: 2}
   sellPorcentage: 0.25
 --- !u!114 &1100700827
 MonoBehaviour:

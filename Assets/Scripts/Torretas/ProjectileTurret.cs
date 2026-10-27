@@ -3,17 +3,37 @@ using Enemigos;
 
 namespace Torretas
 {
-    public class ProjectileTurret : Turret
+    [CreateAssetMenu(fileName = "ProjectileTurretStrategy", menuName = "Scriptable Objects/ProjectileTurretStrategy")]
+    public class ProjectileTurret : ScriptableObject, ITurretStrategy
     {
-        [Header("Shoot")]
         [SerializeField] private GameObject proyectilePrefab;
-        [SerializeField] private Transform shootPoint;
-        protected override void Shoot(Enemy objective)
+
+        public void Shoot(Turret turret, Enemy objective)
         {
-            Vector3 origin = shootPoint.position;
+            Vector3 origin = turret.FirePosition;
             GameObject projectileGO = Instantiate(proyectilePrefab, origin, Quaternion.identity);
             Proyectile proyectile = projectileGO.GetComponent<Proyectile>();
-            proyectile.Initialize(objective, damage);
+            proyectile.Initialize(objective, turret.Damage);
+        }
+
+        public void OnTargetAcquired(Turret turret, Enemy objective)
+        {
+            
+        }
+
+        public void OnShotFired(Turret turret, Enemy objective)
+        {
+           
+        }
+
+        public void OnUpgraded(Turret turret, int newLevel)
+        {
+          
+        }
+
+        public void OnUpgradeFailed(Turret turret)
+        {
+            
         }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827836961358346479}
   - component: {fileID: 3977847478823279160}
-  - component: {fileID: 3358370882253820218}
+  - component: {fileID: 416279566043486943}
   m_Layer: 0
   m_Name: Proyectile
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3358370882253820218
+--- !u!114 &416279566043486943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 657930170676416682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa9a5044dbb475aa12790b84bbeb2d3, type: 3}
+  m_Script: {fileID: 11500000, guid: ac6fdf052fc84ae296db0a41f40bcfa6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Torretas.Proyectile
+  m_EditorClassIdentifier: Assembly-CSharp::Torretas.HomingProjectile
   velocity: 8
   distanceBetweenImpact: 0.1
   lifetimeAfterLosingTarget: 1.5
