@@ -43,8 +43,7 @@ namespace Granja
             menu.transform.position = screenPos;
 
             ClearOptions();
-
-// 3. Obtener la lista de opciones a mostrar
+            
             List<CropDataSO> optionsToDisplay = new List<CropDataSO>();
 
             if (!slot.Taked)
@@ -55,25 +54,22 @@ namespace Granja
             }
             else
             {
-                // Si ya está ocupado, cargamos las evoluciones/subtipos configurados en la planta actual
                 if (slot.CropData != null && slot.CropData.Upgrades != null)
                 {
                     optionsToDisplay = slot.CropData.Upgrades;
                 }
             }
-
-            // 4. Instanciar dinámicamente un botón por cada opción disponible
+            
             foreach (var optionData in optionsToDisplay)
             {
                 CropDataSO targetData = optionData;
                 CreateOptionButton(targetData, () => 
                 {
                     selectedSlot.SetCrop(targetData);
-                    menu.SetActive(false); // Ocultar menú tras la selección
+                    menu.SetActive(false); 
                 });
             }
 
-            // Asegurarnos de que el menú completo sea visible
             menu.SetActive(true);
         }
 

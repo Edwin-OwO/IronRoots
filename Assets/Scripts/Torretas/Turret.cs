@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Economia;
 using UnityEngine;
 using Enemigos;
 
 namespace Torretas
 {
+    [RequireComponent(typeof(Collider2D))]
     public class Turret : MonoBehaviour
     {
+        public static event Action<Turret> OnTurretCreated;
 
         [SerializeField] protected int level = 1;
         [SerializeField] protected float range = 3f;
@@ -32,11 +35,12 @@ namespace Torretas
         private Coroutine targetSearchCoroutine;
         private Coroutine shootCoroutine;
         private Coroutine aimCoroutine;
-
+        private float buffDamage;
+        
         public Vector3 FirePosition => firePoint != null ? firePoint.position : transform.position;
         public int Level => level;
         public float Range => range;
-        public float Damage => damage;
+        public float Damage => damage + buffDamage;
         public float FireRate => fireRate;
 
         protected int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
@@ -170,10 +174,16 @@ namespace Torretas
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, range);
         }
-        public void AddDamage(float extraDamage)
+        public void AddBuffDamage(float extraDamage)
         {
-            damage += extraDamage;  
+            buffDamage += extraDamage;  
         }
+
+        public void RemoveBuffDamage(float extraDamage)
+        {
+            buffDamage -= extraDamage;
+        }
+        
     }
 }
 
