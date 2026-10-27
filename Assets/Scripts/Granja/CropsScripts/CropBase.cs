@@ -8,13 +8,19 @@ namespace Granja
     public abstract class CropBase : MonoBehaviour, ICrop, IEntrySource
     { 
         [SerializeField] protected CropData data; 
-        private float moneyPerCycle;
-        
+        protected float moneyPerCycle;
+        protected float currentMoneyPerCycle;
         public event Action<float> OnEntryGenerated;
 
+        private void OnDisable()
+        {
+            CancelInvoke(nameof(Harvest));
+        }
+        
         private void Start()
         {
             moneyPerCycle = data.MoneyPerCycle;
+            currentMoneyPerCycle = moneyPerCycle;
             PlantAbility();
         }
 
@@ -26,16 +32,8 @@ namespace Granja
         public void Harvest()
         {
             if(!GameManager.Instance.GameActive) return;
-            
-            OnEntryGenerated?.Invoke(moneyPerCycle);
+            OnEntryGenerated?.Invoke(currentMoneyPerCycle);
         }
-
         protected abstract void PlantAbility();
-
-        private void OnDisable()
-        {
-            CancelInvoke(nameof(Harvest));
-        }
-        
     }
 }

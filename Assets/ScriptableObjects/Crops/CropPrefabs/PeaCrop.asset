@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2045c50c7d1e3c4391c832328b5adc7, type: 3}
+  m_Name: PeaCrop
+  m_EditorClassIdentifier: Assembly-CSharp::CropDataSO
+  cropPrefab: {fileID: -8803518742657824021, guid: ef629e80a78d7484286d9262cd54e240, type: 3}
+  cost: 10
+  cropName: BalisticPea
+  cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
+  aviableUpgrades: []

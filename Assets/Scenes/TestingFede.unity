@@ -6383,7 +6383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.WaveManager
   waves:
   - enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
-    amount: 3
+    amount: 1
     timeBetweenSpawns: 2
   principalPath: {fileID: 303996275}
   spawnPoint: {fileID: 1882344082}

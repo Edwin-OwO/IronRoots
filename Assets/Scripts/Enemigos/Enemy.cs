@@ -15,7 +15,7 @@ namespace Enemigos
         private int actualIndexWaypoint;
         
         public event Action<float> OnEntryGenerated;
-        public event Action<Enemy> OnEnemyDied;
+        public static event Action OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
         
         public void Initialize(Path path)
@@ -60,7 +60,7 @@ namespace Enemigos
         private void Die()
         {
             OnEntryGenerated?.Invoke(bounty);
-            OnEnemyDied?.Invoke(this);
+            OnEnemyDied?.Invoke();
             Unregister();
             Destroy(gameObject);
         }

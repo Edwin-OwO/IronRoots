@@ -38,11 +38,13 @@ namespace Enemigos
         private void OnEnable()
         {
             GameManager.OnStartGame += OnStartNextWave;
+            Enemy.OnEnemyDied += OnDie;
         }
 
         private void OnDisable()
         {
             GameManager.OnStartGame -= OnStartNextWave;
+            Enemy.OnEnemyDied -= OnDie;
         }
 
         public void OnStartNextWave()
@@ -70,17 +72,14 @@ namespace Enemigos
         {
             Enemy enemy = enemyFactory.CreateEnemy(prefab, spawnPoint.position, principalPath);
             if (enemy == null) return;
-            
-            enemy.OnEnemyDied += OnDie;
             enemy.OnEnemyReachedEnd += OnFinalStep;
             remainEnemies++;
         }
 
-        private void OnDie(Enemy enemy)
+        private void OnDie()
         {
             remainEnemies--;
             ChekWaveEnd();
-            enemy.OnEnemyDied -= OnDie;
         }
 
         private void OnFinalStep(Enemy enemy)

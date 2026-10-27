@@ -17,4 +17,5 @@ MonoBehaviour:
   cropName: Basic Crop
   cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
   aviableUpgrades:
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: a10f128148b8c894990fcf102c59ffa3, type: 2}
+  - {fileID: 11400000, guid: 3f01c0b8d7e527547bc1551fc8b82f0e, type: 2}
