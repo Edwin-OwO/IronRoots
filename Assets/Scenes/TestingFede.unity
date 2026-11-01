@@ -574,7 +574,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -153649999
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -6381,10 +6381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc57dd7ba8246a59d3e7ac92f65405d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.WaveManager
+  enemyDatabase: {fileID: 11400000, guid: fed0700ab11911a4b996d55691e2b9dc, type: 2}
   waves:
-  - enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
-    amount: 1
-    timeBetweenSpawns: 2
+  - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
+  enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
   principalPath: {fileID: 303996275}
   spawnPoint: {fileID: 1882344082}
   farmBase: {fileID: 1020113654}

@@ -1,80 +1,95 @@
-﻿ using System;
+﻿ 
+using System;
 using Economia;
 using UnityEngine;
 
 namespace Enemigos
 {
     public class Enemy : MonoBehaviour, IEntrySource
-    { 
-        [SerializeField] private float health = 10f;
-        [SerializeField] private float velocity = 2f;
-        [SerializeField] private int bounty = 5;
+    {
         [SerializeField] private ParticleSystem attackParticles;
-        
+
+        private EnemyStrategy strategy;
         private Path path;
+
+        private float health;
         private int actualIndexWaypoint;
-        
+        private bool finished;
+        private bool initialized;
+
         public event Action<float> OnEntryGenerated;
         public static event Action OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
-        
-        public void Initialize(Path path)
+
+        public void Initialize(Path assignedPath, EnemyStrategy assignedStrategy)
         {
-            this.path = path;
+            path = assignedPath;
+            strategy = assignedStrategy;
+
+            health = strategy.MaxHealth;
             actualIndexWaypoint = 0;
+            finished = false;
+            initialized = true;
+
             EconomyManager.Instance.RegisterEntity(this);
         }
 
         private void Update()
         {
-            Move();
-        }
+            if (!initialized || finished || path == null)
+                return;
 
-        private void Move()
-        {
-            if (path == null) return;
-            Vector2 actualPosition = transform.position;
-            Vector2 objetive = path.GetWaypoint(actualIndexWaypoint);
-            Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
-            transform.position = new Vector3(newPosition.x, newPosition.y);
-            if (Vector2.Distance(transform.position, objetive) < 0.05f)
-            {
-                actualIndexWaypoint++;
-                if (actualIndexWaypoint >= path.AmountOfWaypoints)
-                {
-                    OnEndStep();
-                }
-            }
+            if (strategy.Move(this, path, ref actualIndexWaypoint))
+                OnEndStep();
         }
 
         public void TakeDamage(float amount)
         {
+            if (!initialized || finished) return;
+
+            strategy.TakeDamage(this, amount);
+        }
+
+        public void ApplyDamage(float amount)
+        {
+            if (!initialized || finished) return;
+
             health -= amount;
-            CreateAttackParticles();
+
+            if (attackParticles != null)
+                attackParticles.Play();
+
             if (health <= 0f)
-            {
                 Die();
-            }
         }
 
         private void Die()
         {
-            OnEntryGenerated?.Invoke(bounty);
+            if (finished) return;
+            finished = true;
+
+            strategy.OnDeath(this);
+
             OnEnemyDied?.Invoke();
+
             Unregister();
             Destroy(gameObject);
         }
 
         private void OnEndStep()
         {
+            if (finished) return;
+            finished = true;
+
             OnEnemyReachedEnd?.Invoke(this);
+
             Unregister();
             Destroy(gameObject);
         }
 
-        private void CreateAttackParticles()
+        public void GenerateReward(float amount)
         {
-            attackParticles.Play();
+            OnEntryGenerated?.Invoke(amount);
         }
 
         private void Unregister()
@@ -83,3 +98,4 @@ namespace Enemigos
         }
     }
 }
+

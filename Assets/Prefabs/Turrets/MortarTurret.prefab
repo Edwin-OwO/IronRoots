@@ -119,7 +119,7 @@ MonoBehaviour:
   rotatingPart: {fileID: 6577029306780222381}
   rotationSpeed: 360
   spriteAngleOffset: 0
-  turretStrategyAsset: {fileID: 11400000, guid: 35ab24a358492d24b9a434ddbf98959a, type: 2}
+  turretStrategyAsset: {fileID: 11400000, guid: ebe07674709864b4a867f681807b00f9, type: 2}
 --- !u!1 &2218124094258136054
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Economia;
@@ -7,27 +8,27 @@ using UnityEngine;
 
 namespace Enemigos
 {
-    [System.Serializable]
-    public class WaveData
-    {
-        public Enemy enemyPrefab;
-        public int amount;
-        public float timeBetweenSpawns = 0.5f;
-    }
-    public class  WaveManager: MonoBehaviour
+    public class WaveManager : MonoBehaviour
     {
         public static event Action OnWaveEnd;
-        
+        [SerializeField] private EnemyDatabase enemyDatabase;
         [SerializeField] private List<WaveData> waves;
+        [SerializeField] private Enemy enemyPrefab;
+        
         [SerializeField] private Path principalPath;
         [SerializeField] private Transform spawnPoint;
+        
         [SerializeField] private FarmBase farmBase;
 
         private EnemyFactory enemyFactory;
+
         private int actualWave = -1;
         private int remainEnemies;
 
-        public bool waveOnGoing => remainEnemies > 0; 
+        private bool spawning;
+        private bool waveRunning;
+
+        public bool waveOnGoing => waveRunning;
         public int ActualWave => actualWave;
 
         private void Awake()
@@ -49,54 +50,106 @@ namespace Enemigos
 
         public void OnStartNextWave()
         {
-            actualWave++;
-            if (actualWave >= waves.Count)
+            if (waveRunning) return;
+
+            if (actualWave + 1 >= waves.Count)
             {
                 Debug.Log("No quedan mas oleadas definidas.");
                 return;
             }
 
+            actualWave++;
+            waveRunning = true;
+            spawning = true;
+            remainEnemies = 0;
+
             StartCoroutine(SpawnWave(waves[actualWave]));
         }
 
+        
         private IEnumerator SpawnWave(WaveData data)
         {
-            for (int i = 0; i < data.amount; i++)
+            bool firstSpawn = true;
+
+            foreach (EnemySpawnEntry entry in data.enemies)
             {
-                SpawnEnemy(data.enemyPrefab);
-                yield return new WaitForSeconds(data.timeBetweenSpawns);
+                for (int i = 0; i < entry.amount; i++)
+                {
+                    if (!firstSpawn)
+                        yield return new WaitForSeconds(
+                            data.timeBetweenSpawns
+                        );
+
+                    firstSpawn = false;
+                    SpawnEnemy(entry.enemyId);
+                }
             }
+
+            spawning = false;
+            ChekWaveEnd();
         }
 
-        private void SpawnEnemy(Enemy prefab)
+
+        
+        private void SpawnEnemy(string enemyId)
         {
-            Enemy enemy = enemyFactory.CreateEnemy(prefab, spawnPoint.position, principalPath);
-            if (enemy == null) return;
+            EnemyStrategy strategy =
+                enemyDatabase.GetStrategy(enemyId);
+
+            if (strategy == null)
+                return;
+
+            Enemy enemy = enemyFactory.CreateEnemy(
+                enemyPrefab,
+                spawnPoint.position,
+                principalPath,
+                strategy
+            );
+
+            if (enemy == null)
+                return;
+
             enemy.OnEnemyReachedEnd += OnFinalStep;
             remainEnemies++;
         }
 
+
         private void OnDie()
         {
+            if (!waveRunning) return;
+
             remainEnemies--;
             ChekWaveEnd();
         }
 
         private void OnFinalStep(Enemy enemy)
         {
+            enemy.OnEnemyReachedEnd -= OnFinalStep;
+
             farmBase.TakeDamage();
             remainEnemies--;
+
             ChekWaveEnd();
-            enemy.OnEnemyReachedEnd -= OnFinalStep;
         }
 
         private void ChekWaveEnd()
         {
+            if (spawning || !waveRunning)
+                return;
+
             if (remainEnemies <= 0)
             {
-                Debug.Log($"Oleada {actualWave + 1} completada.");
+                waveRunning = false;
+
+                Debug.Log(
+                    $"Oleada {actualWave + 1} completada."
+                );
+
                 OnWaveEnd?.Invoke();
             }
         }
     }
 }
+
+
+

@@ -2,12 +2,14 @@
 using Economia;
 using UnityEngine;
 using Enemigos;
+using JetBrains.Annotations;
 
 namespace Torretas
 {
+    [RequireComponent(typeof(Collider2D))] 
     public class Turret : MonoBehaviour
     {
-
+     
         [SerializeField] protected int level = 1;
         [SerializeField] protected float range = 3f;
         [SerializeField] protected float damage = 5f;
