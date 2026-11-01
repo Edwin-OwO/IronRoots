@@ -16,7 +16,9 @@ namespace Enemigos
         private int actualIndexWaypoint;
         private bool finished;
         private bool initialized;
-
+        
+        public float Velocity => strategy.VelocityMultiplier;
+        
         public event Action<float> OnEntryGenerated;
         public static event Action OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
@@ -95,6 +97,11 @@ namespace Enemigos
         private void Unregister()
         {
             EconomyManager.Instance.UnregisterEntity(this);
+        }
+        
+        public void UpdateVelocity(float newVelocity)
+        {
+            strategy.VelocityMultiplier = newVelocity;      
         }
     }
 }

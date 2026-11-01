@@ -49,7 +49,7 @@ namespace Granja
 
         private void ApplyBuff(Turret turret)
         {
-            turret.AddBuffDamage(damageBonusToTurrets);
+            turret.AddDamage(damageBonusToTurrets);
             buffedTurrets.Add(turret);
         }
         
@@ -59,7 +59,7 @@ namespace Granja
 
             foreach (var turret in buffedTurrets)
             {
-                turret.RemoveBuffDamage(damageBonusToTurrets);
+                turret.RemoveDamage(damageBonusToTurrets);
             }
             
             buffedTurrets.Clear();

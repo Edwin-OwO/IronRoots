@@ -8,8 +8,8 @@ namespace Enemigos
         [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float velocity = 2f;
         [SerializeField] private int bounty = 5;
-        public float velocityMultiplier { get; set; } = 1f;
-        private float currentVelocity => velocity * velocityMultiplier;
+        public float VelocityMultiplier { get; set; } = 1f;
+        private float CurrentVelocity => velocity * VelocityMultiplier;
 
         public float MaxHealth => maxHealth;
         public float Velocity => velocity;
@@ -20,7 +20,7 @@ namespace Enemigos
             Vector2 actualPosition = enemy.transform.position;
             Vector2 objective = path.GetWaypoint(waypointIndex);
 
-            Vector2 newPosition = Vector2.MoveTowards(actualPosition, objective, currentVelocity * Time.deltaTime);
+            Vector2 newPosition = Vector2.MoveTowards(actualPosition, objective, CurrentVelocity * Time.deltaTime);
 
             enemy.transform.position = new Vector3(newPosition.x, newPosition.y, enemy.transform.position.z);
 

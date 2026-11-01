@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Economia;
 using UnityEngine;
 using Enemigos;
@@ -9,17 +10,21 @@ namespace Torretas
     [RequireComponent(typeof(Collider2D))] 
     public class Turret : MonoBehaviour
     {
+        public static event Action<Turret> OnTurretCreated;
      
+        [Header("Stats")]
         [SerializeField] protected int level = 1;
         [SerializeField] protected float range = 3f;
         [SerializeField] protected float damage = 5f;
         [SerializeField] protected float fireRate = 1f;
         [SerializeField] protected int baseUpgradeCost = 30;
         
+        [Header("FindEnemy")]
         [SerializeField] protected LayerMask enemyLayer;
         [SerializeField] private float targetSearchInterval = 0.2f;
         [SerializeField] private float idlePollInterval = 0.2f;
         
+        [Header("Aim")]
         [SerializeField] private Transform firePoint;
         [SerializeField] protected Transform rotatingPart;
         [SerializeField] private float rotationSpeed = 360f;
@@ -47,6 +52,11 @@ namespace Torretas
         {
             if (rotatingPart == null) rotatingPart = transform;
             attackStrategy = turretStrategyAsset as ITurretStrategy;
+        }
+
+        private void Start()
+        {
+            OnTurretCreated?.Invoke(this);
         }
 
         protected virtual void OnEnable()
@@ -175,6 +185,11 @@ namespace Torretas
         public void AddDamage(float extraDamage)
         {
             damage += extraDamage;  
+        }
+
+        public void RemoveDamage(float extraDamage)
+        {
+            damage -= extraDamage;  
         }
     }
 }

@@ -11,14 +11,14 @@ namespace Buffs
         public override void Initialize(float durationDebuff, float amountDebuff)
         {
             enemy = GetComponent<Enemy>();
-            originalVelocity = enemy.VelocityMultiplier;
-            enemy.VelocityMultiplier = amountDebuff;
+            originalVelocity = enemy.Velocity;
+            enemy.UpdateVelocity(amountDebuff);
             Invoke(nameof(RemoveEffect), durationDebuff);
         }
 
         protected override void RemoveEffect()
         {
-            enemy.VelocityMultiplier = originalVelocity;
+            enemy.UpdateVelocity(originalVelocity);
             Destroy(this);
         }
     }
