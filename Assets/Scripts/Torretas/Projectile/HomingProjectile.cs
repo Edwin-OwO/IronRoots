@@ -55,7 +55,7 @@ namespace Torretas
  
         protected override void OnImpact()
         {
-            objective.TakeDamage(damage);
+            objective.CheckResistance(damage);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Torretas
                 
                 if (other.TryGetComponent(out Enemy enemy) && alreadyHit.Add(enemy))
                 {
-                    enemy.TakeDamage(damage);
+                    enemy.CheckResistance(damage);
                 }
                 // Enemy enemy =
                 //     other.GetComponentInParent<Enemy>();

@@ -45,11 +45,13 @@ namespace Enemigos
                 OnEndStep();
         }
 
-        public void TakeDamage(float amount)
+        public void CheckResistance(float amount)
         {
+            
             if (!initialized || finished) return;
 
-            strategy.TakeDamage(this, amount);
+            amount = strategy.CheckResistance(this, amount);
+            ApplyDamage(amount);
         }
 
         public void ApplyDamage(float amount)
