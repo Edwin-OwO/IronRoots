@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Granja.BalisticPeaCrop
   data: {fileID: 11400000, guid: c3e9b5c6a11d74747989a517945b9a28, type: 2}
   damageBonusToTurrets: 10
-  searchRadius: 100
+  searchRadius: 10000
   turretLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1

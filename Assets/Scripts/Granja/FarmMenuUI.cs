@@ -48,7 +48,6 @@ namespace Granja
 
             if (!slot.Taked)
             {
-                // Si el slot está vacío, ofrecemos la planta básica inicial
                 if (basicCropData != null)
                     optionsToDisplay.Add(basicCropData);
             }

@@ -5,13 +5,16 @@ using UnityEngine;
 namespace Enemigos
 {
     public class Enemy : MonoBehaviour, IEntrySource
-    { 
+    {
         [SerializeField] private float health = 10f;
-        [SerializeField] private float velocity = 2f;
+        [SerializeField] private float baseVelocity = 2f;
         [SerializeField] private int bounty = 5;
         [SerializeField] private ParticleSystem attackParticles;
-        
-        private Path path;
+
+        public float VelocityMultiplier { get; set; } = 1f;
+        private float CurrentVelocity => baseVelocity*VelocityMultiplier;
+
+    private Path path;
         private int actualIndexWaypoint;
         
         public event Action<float> OnEntryGenerated;
@@ -35,7 +38,7 @@ namespace Enemigos
             if (path == null) return;
             Vector2 actualPosition = transform.position;
             Vector2 objetive = path.GetWaypoint(actualIndexWaypoint);
-            Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, velocity * Time.deltaTime); 
+            Vector2 newPosition = Vector2.MoveTowards(actualPosition,objetive, CurrentVelocity * Time.deltaTime); 
             transform.position = new Vector3(newPosition.x, newPosition.y);
             if (Vector2.Distance(transform.position, objetive) < 0.05f)
             {

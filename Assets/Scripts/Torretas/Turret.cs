@@ -35,7 +35,7 @@ namespace Torretas
         private Coroutine targetSearchCoroutine;
         private Coroutine shootCoroutine;
         private Coroutine aimCoroutine;
-        private float buffDamage;
+        [SerializeField]private float buffDamage;
         
         public Vector3 FirePosition => firePoint != null ? firePoint.position : transform.position;
         public int Level => level;
@@ -49,6 +49,11 @@ namespace Torretas
         {
             if (rotatingPart == null) rotatingPart = transform;
             attackStrategy = turretStrategyAsset as ITurretStrategy;
+        }
+
+        private void Start()
+        {
+            OnTurretCreated?.Invoke(this);
         }
 
         protected virtual void OnEnable()

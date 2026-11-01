@@ -16,4 +16,5 @@ MonoBehaviour:
   cost: 10
   cropName: BalisticPea
   cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
-  aviableUpgrades: []
+  aviableUpgrades:
+  - {fileID: 11400000, guid: 6183b89f3bf5b9240a952b348f478b41, type: 2}

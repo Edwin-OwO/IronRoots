@@ -261,7 +261,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1133889008}
         m_TargetAssemblyTypeName: Enemigos.WaveManager, Assembly-CSharp
-        m_MethodName: StartNextWave
+        m_MethodName: OnStartNextWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -574,7 +574,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -153649999
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -6333,7 +6333,7 @@ MonoBehaviour:
   offset: {x: 0, y: 100}
   buildMenuPanel: {fileID: 1711872356}
   actionMenuPanel: {fileID: 411715443}
-  defaultSoAsset: {fileID: 11400000, guid: bc24372e99386494095a8113347cc6aa, type: 2}
+  defaultSoAsset: {fileID: 11400000, guid: a48f85e292fb1364cb33b57403d8299c, type: 2}
   sellPorcentage: 0.25
 --- !u!114 &1100700827
 MonoBehaviour:
@@ -6383,7 +6383,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.WaveManager
   waves:
   - enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
-    amount: 1
+    amount: 2
+    timeBetweenSpawns: 2
+  - enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
+    amount: 3
+    timeBetweenSpawns: 2
+  - enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
+    amount: 4
     timeBetweenSpawns: 2
   principalPath: {fileID: 303996275}
   spawnPoint: {fileID: 1882344082}
@@ -7252,11 +7258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742548124924085737, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.44
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 8742548124924085737, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.56
+      value: 2.16
       objectReference: {fileID: 0}
     - target: {fileID: 8742548124924085737, guid: ec75c9611419b064d8bae7e77724f27c, type: 3}
       propertyPath: m_LocalPosition.z
