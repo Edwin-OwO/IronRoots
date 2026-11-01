@@ -4,19 +4,19 @@ namespace Enemigos
 {
     public class EnemyFactory
     {
-        public Enemy CreateEnemy(Enemy prefab, Vector3 position, Path path)
+        public Enemy CreateEnemy(
+            Enemy prefab,
+            Vector3 position,
+            Path path,
+            EnemyStrategy strategy)
         {
-            Enemy instance = Object.Instantiate(prefab, position, Quaternion.identity);
-            var enemy = instance.GetComponent<Enemy>();
+            Enemy enemy = Object.Instantiate(
+                prefab,
+                position,
+                Quaternion.identity
+            );
 
-            if (enemy != null)
-            {
-                enemy.Initialize(path);
-            }
-            else
-            {
-                Debug.LogError($"El prefab {prefab.name} no contiene el componente Enemy.");
-            }
+            enemy.Initialize(path, strategy);
 
             return enemy;
         }

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Economia;
 using UnityEngine;
 using Enemigos;
+using JetBrains.Annotations;
 
 namespace Torretas
 {
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Collider2D))] 
     public class Turret : MonoBehaviour
     {
-        public static event Action<Turret> OnTurretCreated;
-
+     
         [SerializeField] protected int level = 1;
         [SerializeField] protected float range = 3f;
         [SerializeField] protected float damage = 5f;
@@ -35,12 +34,11 @@ namespace Torretas
         private Coroutine targetSearchCoroutine;
         private Coroutine shootCoroutine;
         private Coroutine aimCoroutine;
-        [SerializeField]private float buffDamage;
-        
+
         public Vector3 FirePosition => firePoint != null ? firePoint.position : transform.position;
         public int Level => level;
         public float Range => range;
-        public float Damage => damage + buffDamage;
+        public float Damage => damage;
         public float FireRate => fireRate;
 
         protected int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
@@ -49,11 +47,6 @@ namespace Torretas
         {
             if (rotatingPart == null) rotatingPart = transform;
             attackStrategy = turretStrategyAsset as ITurretStrategy;
-        }
-
-        private void Start()
-        {
-            OnTurretCreated?.Invoke(this);
         }
 
         protected virtual void OnEnable()
@@ -179,16 +172,10 @@ namespace Torretas
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, range);
         }
-        public void AddBuffDamage(float extraDamage)
+        public void AddDamage(float extraDamage)
         {
-            buffDamage += extraDamage;  
+            damage += extraDamage;  
         }
-
-        public void RemoveBuffDamage(float extraDamage)
-        {
-            buffDamage -= extraDamage;
-        }
-        
     }
 }
 
