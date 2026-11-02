@@ -16,7 +16,7 @@ namespace Torretas
         [SerializeField] protected int level = 1;
         [SerializeField] protected float range = 3f;
         [SerializeField] protected float damage = 5f;
-        [SerializeField] protected float fireRate = 1f;
+        [SerializeField] protected float baseFireRate = 1f;
         [SerializeField] protected int baseUpgradeCost = 30;
         
         [Header("FindEnemy")]
@@ -44,7 +44,8 @@ namespace Torretas
         public int Level => level;
         public float Range => range;
         public float Damage => damage;
-        public float FireRate => fireRate;
+        public float FireRateMultiplier { get; set; }
+        public float ActualFireRate => baseFireRate*FireRateMultiplier;
 
         protected int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
 
@@ -101,7 +102,7 @@ namespace Torretas
                 attackStrategy.Shoot(this, currentTarget);
                 attackStrategy.OnShotFired(this, currentTarget);
 
-                yield return new WaitForSeconds(1f / fireRate);
+                yield return new WaitForSeconds(1f / ActualFireRate);
             }
         }
         
@@ -172,7 +173,7 @@ namespace Torretas
             level++;
             range *= 1.15f;
             damage *= 1.25f;
-            fireRate *= 0.9f;
+            baseFireRate *= 0.9f;
 
             attackStrategy.OnUpgraded(this, level);
         }
@@ -190,6 +191,11 @@ namespace Torretas
         public void RemoveDamage(float extraDamage)
         {
             damage -= extraDamage;  
+        }
+        
+        public void UpdateFireRate(float newFireRate)
+        {
+            FireRateMultiplier = newFireRate;
         }
     }
 }

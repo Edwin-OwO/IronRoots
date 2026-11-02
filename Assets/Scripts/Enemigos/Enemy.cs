@@ -17,7 +17,7 @@ namespace Enemigos
         private bool finished;
         private bool initialized;
         
-        public float Velocity => strategy.VelocityMultiplier;
+        public float VelocityMultiplier { get; set; } = 1f;
         
         public event Action<float> OnEntryGenerated;
         public static event Action OnEnemyDied;
@@ -41,7 +41,7 @@ namespace Enemigos
             if (!initialized || finished || path == null)
                 return;
 
-            if (strategy.Move(this, path, ref actualIndexWaypoint))
+            if (strategy.Move(this, path, ref actualIndexWaypoint, VelocityMultiplier))
                 OnEndStep();
         }
 
@@ -99,11 +99,6 @@ namespace Enemigos
         private void Unregister()
         {
             EconomyManager.Instance.UnregisterEntity(this);
-        }
-        
-        public void UpdateVelocity(float newVelocity)
-        {
-            strategy.VelocityMultiplier = newVelocity;      
         }
     }
 }

@@ -9,12 +9,14 @@ namespace Buffs
         
         public override void Initialize(float durationBuff, float amountBuff)
         {
-            throw new System.NotImplementedException();
+            turret = GetComponent<Turret>();
+            originalFireRate = turret.ActualFireRate;
+            turret.UpdateFireRate(amountBuff);
         }
 
         protected override void RemoveEffect()
         {
-            
+            //uwu
         }
     }
 }
