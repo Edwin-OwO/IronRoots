@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638620a42460455183540582131bc855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.IceCrop
-  data: {fileID: 11400000, guid: aff5e1785dbbb7442ae9277b2b547470, type: 2}
+  data: {fileID: 11400000, guid: 5c7c09473f388574f9429d8fb456fc77, type: 2}
   slowAmount: 0.5
   durationDebuff: 6
   range: 5

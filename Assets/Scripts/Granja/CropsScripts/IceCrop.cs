@@ -35,7 +35,6 @@ namespace Granja
             if (other.CompareTag("Enemy"))
             {
                 var enemy = other.GetComponentInChildren<Enemy>();
-                Debug.Log("awa");
                 ApplyIceDebuff(enemy);
             }
         }
@@ -46,7 +45,6 @@ namespace Granja
             //if(!slowedEnemies.Add(enemy)) return;
             if (slowedEnemies.Contains(enemy)) return;
             slowedEnemies.Add(enemy);
-            Debug.Log("uwu");
             IceDebuff iceDebuff = enemy.gameObject.AddComponent<IceDebuff>();
             iceDebuff.Initialize(durationDebuff,slowAmount);
         }
