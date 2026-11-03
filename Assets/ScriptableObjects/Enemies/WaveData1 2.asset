@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479406087c2442279edd63c84bab682c, type: 3}
   m_Name: WaveData1 2
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.WaveData
-  timeBetweenSpawns: 1
+  timeBetweenSpawns: 3
   enemies:
-  - enemyId: 1
-    amount: 9
   - enemyId: 2
     amount: 1
+  - enemyId: 1
+    amount: 20

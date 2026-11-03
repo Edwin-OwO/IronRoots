@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695afb652b874c81a7e16f5a038c8428, type: 3}
   m_Name: EnemigoTanque
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.EnemigoBasico
-  maxHealth: 20
+  maxHealth: 100
   velocity: 1
   bounty: 25
   Armour: 1
