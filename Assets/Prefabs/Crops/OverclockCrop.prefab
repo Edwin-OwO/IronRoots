@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.8950546, y: -4.161465, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.073101, y: 0.073101, z: 0.073101}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.37136126, a: 1}
+  m_Sprite: {fileID: 418963724690787275, guid: 71eb321be63f1104a8f68e2712d55f1f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

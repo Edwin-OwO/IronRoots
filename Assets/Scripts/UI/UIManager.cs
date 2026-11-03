@@ -12,11 +12,13 @@ namespace UI
         [SerializeField] private TextMeshProUGUI LivesText;
         [SerializeField] private GameObject waveButton;
         [SerializeField] private GameObject panelGameOver;
+        [SerializeField] private GameObject panelWin;
         
         private void OnEnable()
         {
             EconomyManager.OnMoneyChanged += UpdateMoney;
             WaveManager.OnWaveEnd += ShowWaveButton;
+            WaveManager.OnWavesFinished += ShowWin;
             FarmBase.OnEnemyEnter += UpdateLife;
             GameManager.OnStartGame +=  OnStartGame;
             GameManager.OnGameOver += ShowGameOver;
@@ -26,6 +28,7 @@ namespace UI
         {
                 EconomyManager.OnMoneyChanged -= UpdateMoney;
                 WaveManager.OnWaveEnd -= ShowWaveButton;
+                WaveManager.OnWavesFinished -= ShowWin;
                 FarmBase.OnEnemyEnter -= UpdateLife;
                 GameManager.OnStartGame -=  OnStartGame;
                 GameManager.OnGameOver -= ShowGameOver;
@@ -55,6 +58,11 @@ namespace UI
         private void ShowGameOver()
         {
             panelGameOver.SetActive(true);
+        }
+
+        private void ShowWin()
+        {
+            panelWin.SetActive(true);
         }
     }
 

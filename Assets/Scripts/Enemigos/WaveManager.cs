@@ -11,6 +11,8 @@ namespace Enemigos
     public class WaveManager : MonoBehaviour
     {
         public static event Action OnWaveEnd;
+        public static event Action OnWavesFinished;
+        
         [SerializeField] private EnemyDatabase enemyDatabase;
         [SerializeField] private List<WaveData> waves;
         [SerializeField] private Enemy enemyPrefab;
@@ -55,6 +57,7 @@ namespace Enemigos
             if (actualWave + 1 >= waves.Count)
             {
                 Debug.Log("No quedan mas oleadas definidas.");
+                
                 return;
             }
 
@@ -86,8 +89,6 @@ namespace Enemigos
             }
             spawning = false;
         }
-
-
         
         private void SpawnEnemy(string enemyId)
         {
@@ -134,16 +135,20 @@ namespace Enemigos
         {
             if (spawning || !waveRunning)
                 return;
-
+            
             if (remainEnemies <= 0)
             {
                 waveRunning = false;
-
-                Debug.Log(
-                    $"Oleada {actualWave + 1} completada."
-                );
-
-                OnWaveEnd?.Invoke();
+                if (actualWave + 1 >= waves.Count)
+                {
+                    OnWavesFinished?.Invoke();
+                }
+                else
+                {
+                    Debug.Log(
+                        $"Oleada {actualWave + 1} completada.");
+                    OnWaveEnd?.Invoke();
+                }
             }
         }
     }
