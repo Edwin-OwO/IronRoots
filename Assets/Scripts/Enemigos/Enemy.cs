@@ -66,8 +66,10 @@ namespace Enemigos
             health -= amount;
 
             if (attackParticles != null)
+            {
+                Debug.Log("uwu");
                 attackParticles.Play();
-
+            }
             if (health <= 0f)
                 Die();
         }

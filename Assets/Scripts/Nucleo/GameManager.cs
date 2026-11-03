@@ -12,10 +12,6 @@ namespace Nucleo
 
         public static event Action OnStartGame;
         public static event Action OnGameOver; 
-         
-        [SerializeField] private WaveManager waveManager;
-        [SerializeField] private UIManager uiManager;
-        [SerializeField] private EconomyManager economyManager;
 
         public bool GameActive { get; private set; }
 
@@ -33,12 +29,14 @@ namespace Nucleo
         {
             FarmBase.OnBaseDestroyed +=  GameOver;
             WaveManager.OnWaveEnd += UpdateGameActive;
+            WaveManager.OnWavesFinished += UpdateGameActive;
         }
 
         private void OnDisable()
         {
             FarmBase.OnBaseDestroyed -= GameOver;
             WaveManager.OnWaveEnd -= UpdateGameActive;
+            WaveManager.OnWavesFinished -= UpdateGameActive;
         }
 
         private void Start()
