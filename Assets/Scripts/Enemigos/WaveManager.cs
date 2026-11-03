@@ -84,9 +84,7 @@ namespace Enemigos
                     SpawnEnemy(entry.enemyId);
                 }
             }
-
             spawning = false;
-            ChekWaveEnd();
         }
 
 
