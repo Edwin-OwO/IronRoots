@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695afb652b874c81a7e16f5a038c8428, type: 3}
+  m_Name: EnemigoRapido
+  m_EditorClassIdentifier: Assembly-CSharp::Enemigos.EnemigoBasico
+  maxHealth: 5
+  velocity: 4
+  bounty: 15
+  Armour: 0
+  enemySprite: {fileID: -4716311849685800126, guid: 8c1f679502d893c49b45a8fbdefde7c2, type: 3}

@@ -8,7 +8,7 @@ namespace Enemigos
     public class Enemy : MonoBehaviour, IEntrySource
     {
         [SerializeField] private ParticleSystem attackParticles;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        
 
         private EnemyStrategy strategy;
         private Path path;
@@ -17,6 +17,7 @@ namespace Enemigos
         private int actualIndexWaypoint;
         private bool finished;
         private bool initialized;
+        private SpriteRenderer spriteRenderer;
         
         public float VelocityMultiplier { get; set; } = 1f;
         
@@ -28,6 +29,7 @@ namespace Enemigos
         {
             path = assignedPath;
             strategy = assignedStrategy;
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
             health = strategy.MaxHealth;
             actualIndexWaypoint = 0;
@@ -35,9 +37,11 @@ namespace Enemigos
             initialized = true;
 
             EconomyManager.Instance.RegisterEntity(this);
+            
             if (spriteRenderer != null && strategy.EnemySprite != null)
             {
                 spriteRenderer.sprite = strategy.EnemySprite;
+                Debug.Log("qa");
             }
         }
 

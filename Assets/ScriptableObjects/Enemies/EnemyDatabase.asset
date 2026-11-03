@@ -15,3 +15,7 @@ MonoBehaviour:
   enemies:
   - id: 1
     strategy: {fileID: 11400000, guid: cfc39c2bfa102dc4a9b1e22cbd1cfef9, type: 2}
+  - id: 2
+    strategy: {fileID: 11400000, guid: 0817ab1c75d3be141b3820e659da49fc, type: 2}
+  - id: 3
+    strategy: {fileID: 11400000, guid: 2ca57a2c594a38c4e9b7280cf35ba6a4, type: 2}
