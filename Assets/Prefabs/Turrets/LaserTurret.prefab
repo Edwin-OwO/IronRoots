@@ -109,7 +109,7 @@ MonoBehaviour:
   level: 1
   range: 5
   damage: 0.25
-  fireRate: 5
+  baseFireRate: 1
   baseUpgradeCost: 30
   enemyLayer:
     serializedVersion: 2
@@ -120,7 +120,7 @@ MonoBehaviour:
   rotatingPart: {fileID: 6577029306780222381}
   rotationSpeed: 360
   spriteAngleOffset: 0
-  turretStrategyAsset: {fileID: 11400000, guid: 8a4e0f1efdf4cb54f9e4dfd78f6147a5, type: 2}
+  turretStrategyAsset: {fileID: 11400000, guid: 1122d9390fbdba44bae7a4c0ee3a7b37, type: 2}
 --- !u!61 &-2718270033618658841
 BoxCollider2D:
   m_ObjectHideFlags: 0

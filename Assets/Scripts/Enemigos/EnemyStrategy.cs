@@ -8,7 +8,10 @@ namespace Enemigos
         [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float velocity = 2f;
         [SerializeField] private int bounty = 5;
-        
+        [SerializeField] private float Armour = 0f;
+        [SerializeField] private Sprite enemySprite;
+
+        public Sprite EnemySprite => enemySprite;
         public float MaxHealth => maxHealth;
         public float Velocity => velocity; 
         public int Bounty => bounty;
@@ -33,9 +36,9 @@ namespace Enemigos
             return false;
         }
 
-        public virtual void TakeDamage(Enemy enemy, float amount)
+        public virtual float CheckResistance(Enemy enemy, float amount)
         {
-            enemy.ApplyDamage(amount);
+            return Mathf.Max(0f, amount - Armour);
         }
 
         public virtual void OnDeath(Enemy enemy)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Economia;
 using UnityEngine;
 using Enemigos;
@@ -23,6 +24,8 @@ namespace Torretas
         [SerializeField] protected LayerMask enemyLayer;
         [SerializeField] private float targetSearchInterval = 0.2f;
         [SerializeField] private float idlePollInterval = 0.2f;
+        private readonly List<Enemy> enemiesByEntry = new();
+        private readonly HashSet<Enemy> detectedEnemies = new();
         
         [Header("Aim")]
         [SerializeField] private Transform firePoint;
@@ -44,7 +47,7 @@ namespace Torretas
         public int Level => level;
         public float Range => range;
         public float Damage => damage;
-        public float FireRateMultiplier { get; set; }
+        public float FireRateMultiplier { get; set; } = 1f;
         public float ActualFireRate => baseFireRate*FireRateMultiplier;
 
         protected int ActualUpgradeCost => Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(1.5f, level - 1));
@@ -91,6 +94,8 @@ namespace Torretas
 
             while (true)
             {
+                currentTarget = FindObjective();
+
                 if (currentTarget == null || !IsInRange(currentTarget))
                 {
                     currentTarget = null;
@@ -101,8 +106,8 @@ namespace Torretas
                 attackStrategy.OnTargetAcquired(this, currentTarget);
                 attackStrategy.Shoot(this, currentTarget);
                 attackStrategy.OnShotFired(this, currentTarget);
-
                 yield return new WaitForSeconds(1f / ActualFireRate);
+                
             }
         }
         
@@ -138,27 +143,48 @@ namespace Torretas
             return sqrDistance <= range * range;
         }
         
+        
+      
         protected virtual Enemy FindObjective()
         {
-            int count = Physics2D.OverlapCircleNonAlloc(transform.position, range, overlapBuffer, enemyLayer);
+            int count = Physics2D.OverlapCircleNonAlloc(
+                transform.position,
+                range,
+                overlapBuffer,
+                enemyLayer
+            );
 
-            Enemy closestEnemy = null;
-            float closestSqrDistance = float.MaxValue;
+            detectedEnemies.Clear();
 
             for (int i = 0; i < count; i++)
             {
-                if (!overlapBuffer[i].TryGetComponent(out Enemy enemy)) continue;
+                if (overlapBuffer[i] == null ||
+                    !overlapBuffer[i].TryGetComponent(out Enemy enemy))
+                    continue;
 
-                float sqrDistance = ((Vector2)enemy.transform.position - (Vector2)transform.position).sqrMagnitude;
-                if (sqrDistance < closestSqrDistance)
-                {
-                    closestSqrDistance = sqrDistance;
-                    closestEnemy = enemy;
-                }
+                if (!enemy.isActiveAndEnabled)
+                    continue;
+
+                detectedEnemies.Add(enemy);
+
+                if (!enemiesByEntry.Contains(enemy))
+                    enemiesByEntry.Add(enemy);
             }
 
-            return closestEnemy;
+            for (int i = enemiesByEntry.Count - 1; i >= 0; i--)
+            {
+                Enemy enemy = enemiesByEntry[i];
+
+                if (enemy == null || !detectedEnemies.Contains(enemy))
+                    enemiesByEntry.RemoveAt(i);
+            }
+
+            return attackStrategy.SelectTarget(
+                enemiesByEntry,
+                transform.position
+            );
         }
+
         
 
         public void Upgrade()
@@ -176,12 +202,6 @@ namespace Torretas
             baseFireRate *= 0.9f;
 
             attackStrategy.OnUpgraded(this, level);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, range);
         }
         public void AddDamage(float extraDamage)
         {

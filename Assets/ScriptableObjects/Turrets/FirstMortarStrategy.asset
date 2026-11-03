@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb391a04cddd40528c03312eca3e1c67, type: 3}
-  m_Name: MortarProjectile
-  m_EditorClassIdentifier: Assembly-CSharp::Torretas.ProjectileTurret
+  m_Script: {fileID: 11500000, guid: 48bcd89e373543a7a755807d26191ace, type: 3}
+  m_Name: FirstMortarStrategy
+  m_EditorClassIdentifier: Assembly-CSharp::Torretas.FirstMortarTurret
   proyectilePrefab: {fileID: 657930170676416682, guid: f61cbeef476f859439f98dd28de7abaa, type: 3}
