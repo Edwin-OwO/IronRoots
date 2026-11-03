@@ -31,8 +31,8 @@ namespace Granja
 
         public void Harvest()
         {
-            if(!GameManager.Instance.GameActive) return;
             OnEntryGenerated?.Invoke(currentMoneyPerCycle);
+            Debug.Log("uwu");
         }
         protected abstract void PlantAbility();
     }

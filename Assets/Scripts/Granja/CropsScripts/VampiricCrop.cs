@@ -7,6 +7,8 @@ namespace Granja
     public class VampiricCrop : CropBase
     {
         [SerializeField] private float moneyPerKillBonus = 0.5f;
+        [SerializeField] private ParticleSystem particleSystem;    
+        
         private float accumulatedBonus = 0f;
         private void OnEnable()
         {
@@ -21,6 +23,10 @@ namespace Granja
         {
             accumulatedBonus += moneyPerKillBonus;
             currentMoneyPerCycle = accumulatedBonus + moneyPerCycle;
+            if (particleSystem != null)
+            {
+                particleSystem.Play();
+            }
         }
     }
 }

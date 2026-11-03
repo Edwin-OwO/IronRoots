@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceCrop
   m_EditorClassIdentifier: Assembly-CSharp::CropDataSO
   cropPrefab: {fileID: 3315418825220420854, guid: 5bf45bf429f0ad54089bd44213d2ac85, type: 3}
-  cost: 10
+  cost: 5
   cropName: IceCrop
   cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
   aviableUpgrades: []

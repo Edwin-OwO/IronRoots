@@ -11,14 +11,8 @@ namespace Granja
         [SerializeField] private float durationDebuff;
         [SerializeField] private float range;
         [SerializeField] private LayerMask enemiesLayer;
-        [SerializeField] private CircleCollider2D cropCollider;
         
         private HashSet<Enemy> slowedEnemies = new HashSet<Enemy>();
-
-        private void Start()
-        {
-            cropCollider.radius = range;
-        }
         
         protected override void PlantAbility()
         {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PeaCrop
   m_EditorClassIdentifier: Assembly-CSharp::CropDataSO
   cropPrefab: {fileID: -8803518742657824021, guid: ef629e80a78d7484286d9262cd54e240, type: 3}
-  cost: 10
+  cost: 5
   cropName: BalisticPea
   cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
   aviableUpgrades:

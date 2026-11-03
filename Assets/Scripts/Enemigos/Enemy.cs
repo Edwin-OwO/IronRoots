@@ -67,7 +67,6 @@ namespace Enemigos
 
             if (attackParticles != null)
             {
-                Debug.Log("uwu");
                 attackParticles.Play();
             }
             if (health <= 0f)

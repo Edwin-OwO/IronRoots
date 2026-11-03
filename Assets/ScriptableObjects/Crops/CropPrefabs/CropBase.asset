@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropBase
   m_EditorClassIdentifier: Assembly-CSharp::CropPrefab
   cropPrefab: {fileID: 3123015471822271916, guid: 3e3271ae4f92ee4409044253e30dc655, type: 3}
-  cost: 15
+  cost: 5
   cropName: Basic Crop
   cropIcon: {fileID: 571361061608822535, guid: 556088d81466b5b40948868622fd8cc0, type: 3}
   aviableUpgrades:
