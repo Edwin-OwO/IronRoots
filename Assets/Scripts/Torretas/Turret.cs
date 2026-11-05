@@ -34,6 +34,10 @@ namespace Torretas
         [SerializeField] private float spriteAngleOffset = -90f;
         
         [SerializeField] private ScriptableObject turretStrategyAsset;
+        
+        [Header("Particles System")]
+        [SerializeField] private ParticleSystem buffedDamageParticles;
+        
         private ITurretStrategy attackStrategy;
         
         private static readonly Collider2D[] overlapBuffer = new Collider2D[16];
@@ -206,11 +210,13 @@ namespace Torretas
         public void AddDamage(float extraDamage)
         {
             damage += extraDamage;  
+            buffedDamageParticles.Play();
         }
 
         public void RemoveDamage(float extraDamage)
         {
             damage -= extraDamage;  
+            buffedDamageParticles.Stop();
         }
         
         public void UpdateFireRate(float newFireRate)

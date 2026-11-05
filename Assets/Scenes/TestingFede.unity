@@ -6825,6 +6825,7 @@ MonoBehaviour:
   enemyDatabase: {fileID: 11400000, guid: fed0700ab11911a4b996d55691e2b9dc, type: 2}
   waves:
   - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
+  - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
   enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
   principalPath: {fileID: 303996275}
   spawnPoint: {fileID: 1882344082}
@@ -8180,7 +8181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592126709
 RectTransform:
   m_ObjectHideFlags: 0

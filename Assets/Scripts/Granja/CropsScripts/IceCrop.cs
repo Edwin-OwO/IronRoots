@@ -11,16 +11,22 @@ namespace Granja
         [SerializeField] private float durationDebuff;
         [SerializeField] private float range;
         [SerializeField] private LayerMask enemiesLayer;
+        [SerializeField] private ParticleSystem particleSystem;
         
         private HashSet<Enemy> slowedEnemies = new HashSet<Enemy>();
         
         protected override void PlantAbility()
         {
+
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemiesLayer);
             foreach (Collider2D hit in hits)
             {
                 var enemy = hit.GetComponent<Enemy>();
                 ApplyIceDebuff(enemy);
+            }
+            if (particleSystem != null)
+            {
+                particleSystem.Play();
             }
         }
 

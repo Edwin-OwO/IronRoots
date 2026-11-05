@@ -6,6 +6,8 @@ namespace Granja
 {
     public class VampiricCrop : CropBase
     {
+        [SerializeField] private AudioClip vampiricCropSound;
+        [Header("Vampiric Crop")]
         [SerializeField] private float moneyPerKillBonus = 0.5f;
         [SerializeField] private ParticleSystem particleSystem;    
         
@@ -27,6 +29,7 @@ namespace Granja
             {
                 particleSystem.Play();
             }
+            audioSource.PlayOneShot(vampiricCropSound);
         }
     }
 }

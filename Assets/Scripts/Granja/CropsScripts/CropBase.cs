@@ -1,13 +1,20 @@
 ﻿using System;
 using Economia;
 using Nucleo;
+using Torretas;
 using UnityEngine;
 
 namespace Granja
 {
+    [RequireComponent(typeof(AudioSource))]
     public abstract class CropBase : MonoBehaviour, ICrop, IEntrySource
     { 
         [SerializeField] protected CropData data; 
+        
+        [Header("Effects")]
+        [SerializeField] protected AudioSource audioSource;
+        [SerializeField] protected AudioClip harvestSound;
+        
         protected float moneyPerCycle;
         protected float currentMoneyPerCycle;
         public event Action<float> OnEntryGenerated;
@@ -32,7 +39,7 @@ namespace Granja
         public void Harvest()
         {
             OnEntryGenerated?.Invoke(currentMoneyPerCycle);
-            Debug.Log("uwu");
+            audioSource.PlayOneShot(harvestSound);
         }
         protected abstract void PlantAbility();
     }

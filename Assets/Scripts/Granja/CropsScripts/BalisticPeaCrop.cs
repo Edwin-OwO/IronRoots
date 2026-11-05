@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Buffs;
 using UnityEngine;
 using Torretas;
 
@@ -8,6 +10,7 @@ namespace Granja
     public class BalisticPeaCrop : CropBase
     {
         [SerializeField] private float damageBonusToTurrets = 10f;
+        [SerializeField] private float buffDuration = 10f;
         [SerializeField] private float searchRadius = 100f;
         [SerializeField] private LayerMask turretLayer;
         
@@ -21,7 +24,6 @@ namespace Granja
         private void OnDisable()
         {
             Turret.OnTurretCreated -= CheckNewTurret;
-            RemoveAllBuffs();
         }
 
         protected override void PlantAbility()
@@ -49,20 +51,9 @@ namespace Granja
 
         private void ApplyBuff(Turret turret)
         {
-            turret.AddDamage(damageBonusToTurrets);
+            DamageBuff damageBuff = turret.gameObject.AddComponent<DamageBuff>();
+            damageBuff.Initialize(buffDuration, damageBonusToTurrets);
             buffedTurrets.Add(turret);
-        }
-        
-        private void RemoveAllBuffs()
-        {
-            buffedTurrets.RemoveWhere(t => t == null);
-
-            foreach (var turret in buffedTurrets)
-            {
-                turret.RemoveDamage(damageBonusToTurrets);
-            }
-            
-            buffedTurrets.Clear();
         }
     }
 }
