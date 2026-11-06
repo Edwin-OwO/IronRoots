@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.BasicCrop
   data: {fileID: 11400000, guid: aff5e1785dbbb7442ae9277b2b547470, type: 2}
+  cropSprite: {fileID: 6057088045991007288}
   audioSource: {fileID: 6381473443778255608}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
 --- !u!82 &6381473443778255608

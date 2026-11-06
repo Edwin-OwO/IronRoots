@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.OverClockCrop
   data: {fileID: 11400000, guid: e3797f4d74083c345ae6b40c134e40dc, type: 2}
+  cropSprite: {fileID: 7868691689138511172}
   audioSource: {fileID: 7143683855291164083}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   fireRateBonus: 5

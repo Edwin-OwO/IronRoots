@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.BalisticPeaCrop
   data: {fileID: 11400000, guid: c3e9b5c6a11d74747989a517945b9a28, type: 2}
+  cropSprite: {fileID: 7479664962059423475}
   audioSource: {fileID: 8079322261251251549}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   damageBonusToTurrets: 10

@@ -21,7 +21,7 @@ namespace Enemigos
         
         public float VelocityMultiplier { get; set; } = 1f;
         
-        public event Action<float> OnEntryGenerated;
+        public event Action<float,SpriteRenderer> OnEntryGenerated;
         public static event Action OnEnemyDied;
         public event Action<Enemy> OnEnemyReachedEnd;
 
@@ -103,7 +103,7 @@ namespace Enemigos
 
         public void GenerateReward(float amount)
         {
-            OnEntryGenerated?.Invoke(amount);
+            OnEntryGenerated?.Invoke(amount,spriteRenderer);
         }
 
         private void Unregister()

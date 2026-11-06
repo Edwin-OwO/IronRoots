@@ -36,7 +36,7 @@ namespace Torretas
         {
             if (!taked) return;
             float refundMoney = actualTurretCost * porcentageToRefund;
-            EconomyManager.Instance.AddMoney(refundMoney);
+            EconomyManager.Instance.AddMoney(refundMoney, actualTurret.SpriteRenderer);
             Destroy(actualTurret.gameObject);
             actualTurret = null;
             taked = false;

@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.IceCrop
   data: {fileID: 11400000, guid: 5c7c09473f388574f9429d8fb456fc77, type: 2}
+  cropSprite: {fileID: 2491406497913258280}
   audioSource: {fileID: 4395230500672914873}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   slowAmount: 0.5

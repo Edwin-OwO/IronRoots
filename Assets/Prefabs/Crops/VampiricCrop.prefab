@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granja.VampiricCrop
   data: {fileID: 11400000, guid: ee0c01b9493f8f5448c3a04df690b1a3, type: 2}
+  cropSprite: {fileID: 2369313830993068523}
   audioSource: {fileID: 4332677262482763647}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   vampiricCropSound: {fileID: 8300000, guid: 34b777922930dcb488c16c1ba59517fe, type: 3}

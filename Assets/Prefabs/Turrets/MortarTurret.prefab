@@ -123,6 +123,7 @@ MonoBehaviour:
   spriteAngleOffset: 0
   turretStrategyAsset: {fileID: 11400000, guid: 7ab60b262031e9c4bac0b2847e930974, type: 2}
   buffedDamageParticles: {fileID: 3349512963673502511}
+  spriteRenderer: {fileID: 8473895303882903061}
 --- !u!61 &4056450050010135469
 BoxCollider2D:
   m_ObjectHideFlags: 0
