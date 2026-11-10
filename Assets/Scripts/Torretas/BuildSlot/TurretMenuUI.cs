@@ -39,10 +39,19 @@ namespace Torretas
         private void OnDisable() =>
             BuildSlot.OnSlotClicked -= ShowMenu;
 
+
         private void ShowMenu(BuildSlot slot)
         {
             if (mainCam == null || slot == null)
                 return;
+
+            // Si seleccionamos nuevamente el mismo slot,
+            // cerramos el menú.
+            if (selectedSlot == slot && menu.activeSelf)
+            {
+                CloseMenu();
+                return;
+            }
 
             selectedSlot = slot;
 
@@ -69,7 +78,7 @@ namespace Torretas
                             return;
 
                         selectedSlot.BuildTurret(turretData);
-                        menu.SetActive(false);
+                        CloseMenu();
                     });
                 }
             }
@@ -79,6 +88,13 @@ namespace Torretas
 
             menu.SetActive(true);
         }
+
+        private void CloseMenu()
+        {
+            menu.SetActive(false);
+            selectedSlot = null;
+        }
+
 
         private void CreateOptionButton(
             TurretSO turretData,

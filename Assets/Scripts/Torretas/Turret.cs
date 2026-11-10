@@ -40,7 +40,14 @@ namespace Torretas
         
         [Header("SpriteRenderer")]
         [SerializeField] private SpriteRenderer spriteRenderer;
-        
+
+        [Header("Sounds")]
+        [SerializeField] private AudioClip shotSound;
+        [SerializeField] private AudioClip upgradeSound;
+        [SerializeField] private AudioClip upgradeFailedSound;
+
+        public static event System.Action<AudioClip> OnSfxRequested;
+
         private ITurretStrategy attackStrategy;
         
         private static readonly Collider2D[] overlapBuffer = new Collider2D[16];
@@ -71,6 +78,28 @@ namespace Torretas
             OnTurretCreated?.Invoke(this);
         }
 
+        private void RequestSound(AudioClip clip)
+        {
+            Debug.Log("a");
+            if (clip != null)
+                OnSfxRequested?.Invoke(clip);
+        }
+
+        public void RequestShotSound()
+        {
+            RequestSound(shotSound);
+        }
+
+        public void RequestUpgradeSound()
+        {
+            RequestSound(upgradeSound);
+        }
+
+        public void RequestUpgradeFailedSound()
+        {
+            RequestSound(upgradeFailedSound);
+        }
+
         protected virtual void OnEnable()
         {
             targetSearchCoroutine = StartCoroutine(TargetSearchRoutine());
@@ -85,40 +114,58 @@ namespace Torretas
             if (aimCoroutine != null) StopCoroutine(aimCoroutine);
             currentTarget = null;
         }
-        
+
+
         private IEnumerator TargetSearchRoutine()
         {
             var wait = new WaitForSeconds(targetSearchInterval);
+
             while (true)
             {
-                currentTarget = FindObjective();
+                Enemy newTarget = FindObjective();
+
+                if (newTarget != currentTarget)
+                {
+                    currentTarget = newTarget;
+
+                    if (currentTarget != null)
+                    {
+                        attackStrategy.OnTargetAcquired(
+                            this,
+                            currentTarget
+                        );
+                    }
+                }
+
                 yield return wait;
             }
         }
-        
+
         private IEnumerator ShootRoutine()
         {
             var idleWait = new WaitForSeconds(idlePollInterval);
 
             while (true)
             {
-                currentTarget = FindObjective();
+                Enemy target = currentTarget;
 
-                if (currentTarget == null || !IsInRange(currentTarget))
+                if (target == null || !IsInRange(target))
                 {
-                    currentTarget = null;
                     yield return idleWait;
                     continue;
                 }
 
-                attackStrategy.OnTargetAcquired(this, currentTarget);
-                attackStrategy.Shoot(this, currentTarget);
-                attackStrategy.OnShotFired(this, currentTarget);
-                yield return new WaitForSeconds(1f / ActualFireRate);
-                
+                attackStrategy.Shoot(this, target);
+                RequestShotSound();
+                attackStrategy.OnShotFired(this, target);
+
+                yield return new WaitForSeconds(
+                    1f / Mathf.Max(0.01f, ActualFireRate)
+                );
             }
         }
-        
+
+
         private IEnumerator AimRoutine()
         {
             var idleWait = new WaitForSeconds(idlePollInterval);
@@ -170,7 +217,7 @@ namespace Torretas
                     !overlapBuffer[i].TryGetComponent(out Enemy enemy))
                     continue;
 
-                if (!enemy.isActiveAndEnabled)
+                if (!enemy.isActiveAndEnabled || !IsInRange(enemy))
                     continue;
 
                 detectedEnemies.Add(enemy);
@@ -201,6 +248,7 @@ namespace Torretas
             if (!EconomyManager.Instance.PayCost(costo))
             {
                 attackStrategy.OnUpgradeFailed(this);
+                RequestUpgradeFailedSound();
                 return;
             }
 
@@ -210,6 +258,7 @@ namespace Torretas
             baseFireRate *= 0.9f;
 
             attackStrategy.OnUpgraded(this, level);
+            RequestUpgradeSound();
         }
         public void AddDamage(float extraDamage)
         {

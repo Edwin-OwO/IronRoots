@@ -1,11 +1,12 @@
 using System;
+using UnityEngine;
 
-namespace Enemigos
+[Serializable]
+public class EnemySpawnEntry
 {
-    [Serializable]
-    public class EnemySpawnEntry
-    {
-        public string enemyId;
-        public int amount = 1;
-    }
+    public string enemyId;
+    public int amount = 1;
+
+    [Min(0f)]
+    public float timeBetweenSpawns = 1f;
 }

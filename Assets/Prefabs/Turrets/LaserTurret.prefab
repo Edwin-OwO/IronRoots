@@ -124,6 +124,9 @@ MonoBehaviour:
   turretStrategyAsset: {fileID: 11400000, guid: 1122d9390fbdba44bae7a4c0ee3a7b37, type: 2}
   buffedDamageParticles: {fileID: 3562979197553204548}
   spriteRenderer: {fileID: 8473895303882903061}
+  shotSound: {fileID: 8300000, guid: f4818586e8f1a7443a47fe05735972e3, type: 3}
+  upgradeSound: {fileID: 8300000, guid: f0f5a1fccf6320849b580ffbb73668cf, type: 3}
+  upgradeFailedSound: {fileID: 8300000, guid: 4f6e9298f144a064f84aa2a03b1bb0bb, type: 3}
 --- !u!61 &-2718270033618658841
 BoxCollider2D:
   m_ObjectHideFlags: 0

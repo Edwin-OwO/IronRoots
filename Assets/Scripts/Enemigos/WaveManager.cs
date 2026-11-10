@@ -72,27 +72,50 @@ namespace Enemigos
             StartCoroutine(SpawnWave(waves[actualWave]));
         }
 
-        
+
+
         private IEnumerator SpawnWave(WaveData data)
         {
-            bool firstSpawn = true;
+            List<Coroutine> coroutines = new();
 
             foreach (EnemySpawnEntry entry in data.enemies)
             {
-                for (int i = 0; i < entry.amount; i++)
-                {
-                    if (!firstSpawn)
-                        yield return new WaitForSeconds(
-                            data.timeBetweenSpawns
-                        );
+                if (entry.amount <= 0) continue;
 
-                    firstSpawn = false;
-                    SpawnEnemy(entry.enemyId);
+                Coroutine coroutine = StartCoroutine(
+                    SpawnEnemyGroup(entry)
+                );
+
+                coroutines.Add(coroutine);
+            }
+
+            foreach (Coroutine coroutine in coroutines)
+            {
+                yield return coroutine;
+            }
+
+            spawning = false;
+            ChekWaveEnd();
+        }
+
+
+        private IEnumerator SpawnEnemyGroup(EnemySpawnEntry entry)
+        {
+            for (int i = 0; i < entry.amount; i++)
+            {
+                SpawnEnemy(entry.enemyId);
+
+                if (i < entry.amount - 1)
+                {
+                    yield return new WaitForSeconds(
+                        entry.timeBetweenSpawns
+                    );
                 }
             }
-            spawning = false;
         }
-        
+
+
+
         private void SpawnEnemy(string enemyId)
         {
             EnemyStrategy strategy =

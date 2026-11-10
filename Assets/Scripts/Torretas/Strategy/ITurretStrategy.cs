@@ -9,9 +9,22 @@ namespace Torretas
         void Shoot(Turret turret, Enemy objective);
 
         void OnTargetAcquired(Turret turret, Enemy objective);
-        void OnShotFired(Turret turret, Enemy objective);
-        void OnUpgraded(Turret turret, int newLevel);
-        void OnUpgradeFailed(Turret turret);
+
+        public void OnShotFired(Turret turret, Enemy objective)
+        {
+            turret.RequestShotSound();
+        }
+
+        public void OnUpgraded(Turret turret, int newLevel)
+        {
+            turret.RequestUpgradeSound();
+        }
+
+        public void OnUpgradeFailed(Turret turret)
+        {
+            turret.RequestUpgradeFailedSound();
+        }
+
 
         Enemy SelectTarget(IReadOnlyList<Enemy> enemies, Vector2 turretPosition);
     }

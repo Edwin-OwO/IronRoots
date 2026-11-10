@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.EnemigoBasico
   maxHealth: 10
   velocity: 2
-  bounty: 20
+  bounty: 5
   Armour: 0
   enemySprite: {fileID: -1930003101044566371, guid: 300f8bdacae8eab48b98fe405178865e, type: 3}
