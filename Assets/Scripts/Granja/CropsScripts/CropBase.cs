@@ -40,7 +40,9 @@ namespace Granja
 
         public void Harvest()
         {
-            if (!GameManager.Instance.GameActive || FarmBase.Instance.IsDestroyed) return;
+            if (GameManager.Instance.GameActive == false) return;
+            if (FarmBase.Instance.IsDestroyed) return;
+
             OnEntryGenerated?.Invoke(currentMoneyPerCycle, cropSprite);
             audioSource.PlayOneShot(harvestSound);
         }

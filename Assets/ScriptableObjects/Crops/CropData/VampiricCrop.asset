@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75aa77df2ec770a40a82ab5acd53495e, type: 3}
   m_Name: VampiricCrop
   m_EditorClassIdentifier: Assembly-CSharp::CropData
-  moneyPerCycle: 3
-  timePerCycle: 6
+  moneyPerCycle: 2
+  timePerCycle: 5

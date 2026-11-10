@@ -111,7 +111,7 @@ MonoBehaviour:
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   damageBonusToTurrets: 10
   buffDuration: 10
-  searchRadius: 10000
+  searchRadius: 60
   turretLayer:
     serializedVersion: 2
     m_Bits: 1

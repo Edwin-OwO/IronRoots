@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BasicCrop
   m_EditorClassIdentifier: Assembly-CSharp::CropData
   moneyPerCycle: 2
-  timePerCycle: 5
+  timePerCycle: 4

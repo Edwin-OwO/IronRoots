@@ -6746,7 +6746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4080296ebbef44798b05955b8f7f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nucleo.FarmBase
-  health: 2
+  health: 5
   farmSlots:
   - {fileID: 1527553785}
   - {fileID: 1073604176}
@@ -7149,7 +7149,9 @@ MonoBehaviour:
   enemyDatabase: {fileID: 11400000, guid: fed0700ab11911a4b996d55691e2b9dc, type: 2}
   waves:
   - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
-  - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
+  - {fileID: 11400000, guid: 66df96086935df3469d44223731711d7, type: 2}
+  - {fileID: 11400000, guid: ffe9eebc69990d844a5069551080d0f9, type: 2}
+  - {fileID: 11400000, guid: adfe9c8b583326242ab8fbb5e22d8c7f, type: 2}
   enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
   principalPath: {fileID: 303996275}
   spawnPoint: {fileID: 1882344082}

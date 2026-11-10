@@ -26,17 +26,17 @@ namespace Nucleo
         private void OnEnable()
         {
             FarmBase.OnBaseDestroyed +=  GameOver;
-            WaveManager.OnWaveEnd += UpdateGameActive;
-            WaveManager.OnWavesFinished += UpdateGameActive;
-            WaveManager.OnWaveStart += UpdateGameActive;
+            WaveManager.OnWaveEnd += GameActiveToFalse;
+            WaveManager.OnWavesFinished += GameActiveToFalse;
+            WaveManager.OnWaveStart += GameActiveToTrue;
         }
 
         private void OnDisable()
         {
             FarmBase.OnBaseDestroyed -= GameOver;
-            WaveManager.OnWaveEnd -= UpdateGameActive;
-            WaveManager.OnWavesFinished -= UpdateGameActive;
-            WaveManager.OnWaveStart -= UpdateGameActive;
+            WaveManager.OnWaveEnd -= GameActiveToFalse;
+            WaveManager.OnWavesFinished -= GameActiveToFalse;
+            WaveManager.OnWaveStart -= GameActiveToTrue;
         }
 
         private void Start()
@@ -44,9 +44,14 @@ namespace Nucleo
             OnStartGame?.Invoke();
         }
 
-        private void UpdateGameActive()
+        private void GameActiveToFalse()
         {
-            GameActive = !GameActive;
+            GameActive = false;
+
+        }
+        private void GameActiveToTrue()
+        {
+            GameActive = true;
         }
 
         private void GameOver()

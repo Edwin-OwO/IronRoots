@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PeaCrop
   m_EditorClassIdentifier: Assembly-CSharp::CropData
   moneyPerCycle: 3
-  timePerCycle: 6
+  timePerCycle: 5

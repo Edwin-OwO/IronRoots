@@ -147,7 +147,7 @@ MonoBehaviour:
   audioSource: {fileID: 7143683855291164083}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
   fireRateBonus: 5
-  searchRadius: 100
+  searchRadius: 60
   turretLayer:
     serializedVersion: 2
     m_Bits: 0
