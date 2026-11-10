@@ -146,7 +146,7 @@ MonoBehaviour:
   cropSprite: {fileID: 7868691689138511172}
   audioSource: {fileID: 7143683855291164083}
   harvestSound: {fileID: 8300000, guid: dd7fc97562e525b4490d71563d888410, type: 3}
-  fireRateBonus: 5
+  fireRateBonus: 2
   searchRadius: 60
   turretLayer:
     serializedVersion: 2

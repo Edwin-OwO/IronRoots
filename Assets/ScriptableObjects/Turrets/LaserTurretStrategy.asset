@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LaserTurretStrategy
   m_EditorClassIdentifier: Assembly-CSharp::Torretas.ProyectileTurretStrategy
   turretPrefab: {fileID: 1289986895740305400, guid: 09cdbc5d4937d784782b0cb6b00eaf4e, type: 3}
-  cost: 100
+  cost: 150

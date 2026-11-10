@@ -111,7 +111,7 @@ MonoBehaviour:
   range: 5
   damage: 0.25
   baseFireRate: 5
-  baseUpgradeCost: 30
+  baseUpgradeCost: 75
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

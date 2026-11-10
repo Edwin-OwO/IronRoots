@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MortarTurretStrategy
   m_EditorClassIdentifier: Assembly-CSharp::Torretas.ProyectileTurretStrategy
   turretPrefab: {fileID: 1289986895740305400, guid: b50054f81e6424a4d84bbc15ec95a5e4, type: 3}
-  cost: 100
+  cost: 200
