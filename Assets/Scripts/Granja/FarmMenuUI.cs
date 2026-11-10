@@ -33,6 +33,12 @@ namespace Granja
 
         private void ShowMenu(FarmSlot slot)
         {
+            if (menu.activeSelf)
+            {
+                menu.SetActive(false);
+                return;
+            }
+            
             selectedSlot = slot;
 
             if (mainCam == null) return;

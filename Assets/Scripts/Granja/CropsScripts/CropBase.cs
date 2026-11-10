@@ -1,16 +1,26 @@
 ﻿using System;
 using Economia;
 using Nucleo;
+using Torretas;
 using UnityEngine;
 
 namespace Granja
 {
+    [RequireComponent(typeof(AudioSource))]
     public abstract class CropBase : MonoBehaviour, ICrop, IEntrySource
     { 
         [SerializeField] protected CropData data; 
+        
+        [Header("GameObject")]
+        [SerializeField] protected SpriteRenderer cropSprite;
+        
+        [Header("Effects")]
+        [SerializeField] protected AudioSource audioSource;
+        [SerializeField] protected AudioClip harvestSound;
+        
         protected float moneyPerCycle;
         protected float currentMoneyPerCycle;
-        public event Action<float> OnEntryGenerated;
+        public event Action<float,SpriteRenderer> OnEntryGenerated;
 
         private void OnDisable()
         {
@@ -31,8 +41,8 @@ namespace Granja
 
         public void Harvest()
         {
-            OnEntryGenerated?.Invoke(currentMoneyPerCycle);
-            Debug.Log("uwu");
+            OnEntryGenerated?.Invoke(currentMoneyPerCycle, cropSprite);
+            audioSource.PlayOneShot(harvestSound);
         }
         protected abstract void PlantAbility();
     }

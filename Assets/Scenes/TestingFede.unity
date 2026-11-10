@@ -6639,6 +6639,7 @@ GameObject:
   - component: {fileID: 1100700821}
   - component: {fileID: 1100700826}
   - component: {fileID: 1100700827}
+  - component: {fileID: 1100700828}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -6745,6 +6746,7 @@ RectTransform:
   - {fileID: 139823625}
   - {fileID: 244666600}
   - {fileID: 1592126709}
+  - {fileID: 1128460926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6793,6 +6795,57 @@ MonoBehaviour:
   optionsContainer: {fileID: 947557790}
   optionButtonPrefab: {fileID: 5740137988707541604, guid: e70edc3218750e34da09c539385b06c1, type: 3}
   basicCropData: {fileID: 11400000, guid: 769f3502515a99b4db72de806e5256bb, type: 2}
+--- !u!114 &1100700828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100700820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e40981cfc34be3a03dd89ff516a972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.NotificationManager
+  notificationPrefab: {fileID: 8149661943461353968, guid: 9a511a69eb9c90147999f68834971663, type: 3}
+  container: {fileID: 1128460926}
+  spacing: 70
+  startSpawnPosition: {x: 0, y: 50}
+--- !u!1 &1128460925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128460926}
+  m_Layer: 5
+  m_Name: NotificationsGO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1128460926
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128460925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1100700825}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.9054641, y: 0.89900005}
+  m_AnchorMax: {x: 0.9054641, y: 0.89900005}
+  m_AnchoredPosition: {x: -49.685, y: -50.297}
+  m_SizeDelta: {x: 99.37, y: 50.755}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1133889007
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,6 +6877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemigos.WaveManager
   enemyDatabase: {fileID: 11400000, guid: fed0700ab11911a4b996d55691e2b9dc, type: 2}
   waves:
+  - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
   - {fileID: 11400000, guid: a429c3f88e8cd6243ba399064487e34c, type: 2}
   enemyPrefab: {fileID: 9011537343178991236, guid: 7d2a1bf7a399565498ec7d9a9096da4c, type: 3}
   principalPath: {fileID: 303996275}
@@ -8180,7 +8234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592126709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9015,10 +9069,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1100700825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9054641, y: 0.96363205}
-  m_AnchorMax: {x: 0.9054641, y: 0.96363205}
-  m_AnchoredPosition: {x: 0, y: -69}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.85300004, y: 0.87500006}
+  m_AnchorMax: {x: 0.9578124, y: 0.9238519}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: -3, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1997753319
 MonoBehaviour:

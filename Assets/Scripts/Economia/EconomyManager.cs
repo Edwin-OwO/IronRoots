@@ -6,6 +6,7 @@ namespace Economia
     public class EconomyManager : MonoBehaviour
     {
         public static event Action<float> OnMoneyChanged; 
+        public static event Action<float, SpriteRenderer> OnIncomeNotification;
         
         public static EconomyManager Instance { get; private set; }
 
@@ -33,10 +34,11 @@ namespace Economia
             entry.OnEntryGenerated -= AddMoney;
         }
 
-        public void AddMoney(float amount)
+        public void AddMoney(float amount, SpriteRenderer sprite)
         {
             money += amount;
             OnMoneyChanged?.Invoke(money);
+            OnIncomeNotification?.Invoke(amount, sprite);
         }
 
         private bool CanBuy(float cost) => money >= cost;

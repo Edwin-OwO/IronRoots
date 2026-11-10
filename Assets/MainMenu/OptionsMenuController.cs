@@ -22,7 +22,6 @@ namespace Menu
         private void Start()
         {
             CargarVolumenGuardado();
-            PoblarDropdownDeResoluciones();
         }
 
         // ---------- Sonido ----------
@@ -41,44 +40,6 @@ namespace Menu
                 float valorGuardado = PlayerPrefs.GetFloat(volumeParameter);
                 audioMixer.SetFloat(volumeParameter, valorGuardado);
             }
-        }
-
-        // ---------- Resolucion ----------
-
-        private void PoblarDropdownDeResoluciones()
-        {
-            resolucionesDisponibles = Screen.resolutions;
-            resolutionDropdown.ClearOptions();
-
-            List<string> opciones = new List<string>();
-            int indiceActual = 0;
-
-            for (int i = 0; i < resolucionesDisponibles.Length; i++)
-            {
-                Resolution res = resolucionesDisponibles[i];
-                opciones.Add($"{res.width} x {res.height}");
-
-                bool esLaActual = res.width == Screen.currentResolution.width
-                                && res.height == Screen.currentResolution.height;
-                if (esLaActual) indiceActual = i;
-            }
-
-            resolutionDropdown.AddOptions(opciones);
-            resolutionDropdown.value = indiceActual;
-            resolutionDropdown.RefreshShownValue();
-        }
-
-        /// <summary>Conectar al OnValueChanged() del dropdown de resoluciones.</summary>
-        public void SetResolution(int indice)
-        {
-            Resolution res = resolucionesDisponibles[indice];
-            Screen.SetResolution(res.width, res.height, Screen.fullScreen);
-        }
-
-        /// <summary>Conectar al OnValueChanged() de un Toggle de pantalla completa.</summary>
-        public void SetFullscreen(bool esPantallaCompleta)
-        {
-            Screen.fullScreen = esPantallaCompleta;
         }
         
         public void PlayMenu()
