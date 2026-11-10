@@ -12,13 +12,7 @@ namespace Menu
         [Header("Sonido")]
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private string volumeParameter = "MasterVolume"; // debe estar Exposed en el mixer
-
-        [Header("Resolucion")]
-        [SerializeField] private TMP_Dropdown resolutionDropdown;
-        [SerializeField] private Toggle fullscreenToggle;
-
-        private Resolution[] resolucionesDisponibles;
-
+        
         private void Start()
         {
             CargarVolumenGuardado();

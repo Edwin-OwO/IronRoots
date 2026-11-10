@@ -323,8 +323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Menu.OptionsMenuController
   audioMixer: {fileID: 24100000, guid: 472b645fbba070e49a141be5056f1262, type: 2}
   volumeParameter: MasterVolume
-  resolutionDropdown: {fileID: 0}
-  fullscreenToggle: {fileID: 0}
 --- !u!4 &391022622
 Transform:
   m_ObjectHideFlags: 0
@@ -449,10 +447,10 @@ RectTransform:
   - {fileID: 1762447350}
   m_Father: {fileID: 1995776901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.2136667}
-  m_AnchorMax: {x: 0.5, y: 0.2136667}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 403.0792, y: 75.57739}
+  m_AnchorMin: {x: 0.50572914, y: 0.09066668}
+  m_AnchorMax: {x: 0.50572914, y: 0.15814815}
+  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_SizeDelta: {x: 403.0792, y: 2.5773926}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &918163584
 MonoBehaviour:
@@ -598,15 +596,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 3472809566376455610, guid: 2869536df08cf7149a24e2f9bc3d154a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -811,10 +809,10 @@ RectTransform:
   - {fileID: 355993731}
   m_Father: {fileID: 1995776901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15347917, y: 0.4768148}
-  m_AnchorMax: {x: 0.319, y: 0.51000005}
-  m_AnchoredPosition: {x: -0.03845215, y: -2.8076782}
-  m_SizeDelta: {x: -0.0769043, y: 3.6153984}
+  m_AnchorMin: {x: 0.068, y: 0.46114817}
+  m_AnchorMax: {x: 0.23500001, y: 0.5}
+  m_AnchoredPosition: {x: -0.52001953, y: 2}
+  m_SizeDelta: {x: -3.0769043, y: -2.3846016}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715100087
 MonoBehaviour:
@@ -963,7 +961,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.6
+  m_fontSize: 67.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1050,8 +1048,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_AnchoredPosition: {x: -0.00000095367, y: 0}
+  m_SizeDelta: {x: 39.3561, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795618146
 MonoBehaviour:
@@ -1159,10 +1157,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1995776901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.14983332, y: 0.5285555}
-  m_AnchorMax: {x: 0.25352085, y: 0.57600003}
-  m_AnchoredPosition: {x: -0.5, y: -0.5}
-  m_SizeDelta: {x: -1, y: -1}
+  m_AnchorMin: {x: 0.068, y: 0.508}
+  m_AnchorMax: {x: 0.20856252, y: 0.5711851}
+  m_AnchoredPosition: {x: 0, y: 0.9599991}
+  m_SizeDelta: {x: -0.0318985, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898319536
 MonoBehaviour:
@@ -1211,10 +1209,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 61.05
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

@@ -1,7 +1,6 @@
 ﻿using System;
 using Economia;
 using Nucleo;
-using Torretas;
 using UnityEngine;
 
 namespace Granja
@@ -41,6 +40,7 @@ namespace Granja
 
         public void Harvest()
         {
+            if (!GameManager.Instance.GameActive || FarmBase.Instance.IsDestroyed) return;
             OnEntryGenerated?.Invoke(currentMoneyPerCycle, cropSprite);
             audioSource.PlayOneShot(harvestSound);
         }

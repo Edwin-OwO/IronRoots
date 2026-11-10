@@ -1,8 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using Enemigos;
-using Economia;
-using UI;
     
 namespace Nucleo
 {
@@ -11,9 +9,9 @@ namespace Nucleo
         public static GameManager Instance { get; private set; }
 
         public static event Action OnStartGame;
-        public static event Action OnGameOver; 
+        public static event Action OnGameOver;
 
-        public bool GameActive { get; private set; }
+        public bool GameActive { get; private set; } = true;
 
         private void Awake()
         {
@@ -30,6 +28,7 @@ namespace Nucleo
             FarmBase.OnBaseDestroyed +=  GameOver;
             WaveManager.OnWaveEnd += UpdateGameActive;
             WaveManager.OnWavesFinished += UpdateGameActive;
+            WaveManager.OnWaveStart += UpdateGameActive;
         }
 
         private void OnDisable()
@@ -37,6 +36,7 @@ namespace Nucleo
             FarmBase.OnBaseDestroyed -= GameOver;
             WaveManager.OnWaveEnd -= UpdateGameActive;
             WaveManager.OnWavesFinished -= UpdateGameActive;
+            WaveManager.OnWaveStart -= UpdateGameActive;
         }
 
         private void Start()

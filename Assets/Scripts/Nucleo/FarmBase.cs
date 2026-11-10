@@ -17,6 +17,7 @@ namespace Nucleo
         [SerializeField] private List<FarmSlot> farmSlots;
         
         public int Health => health;
+        public bool IsDestroyed { get; private set; } = false;
         
         private void Awake()
         {
@@ -30,6 +31,8 @@ namespace Nucleo
         
        public void TakeDamage()
       {
+          if(IsDestroyed) return;
+          
          health  -= 1;
          OnEnemyEnter?.Invoke(health);
          
@@ -43,6 +46,7 @@ namespace Nucleo
            if (health <= 0) 
            {
              Debug.Log("Game Over: la base fue destruida."); 
+             IsDestroyed = true;
              OnBaseDestroyed?.Invoke();
            }
       }

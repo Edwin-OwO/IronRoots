@@ -12,6 +12,7 @@ namespace Enemigos
     {
         public static event Action OnWaveEnd;
         public static event Action OnWavesFinished;
+        public static event Action OnWaveStart;
         
         [SerializeField] private EnemyDatabase enemyDatabase;
         [SerializeField] private List<WaveData> waves;
@@ -60,7 +61,9 @@ namespace Enemigos
                 
                 return;
             }
-
+            
+            OnWaveStart?.Invoke();
+            
             actualWave++;
             waveRunning = true;
             spawning = true;

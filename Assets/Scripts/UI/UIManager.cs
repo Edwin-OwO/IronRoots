@@ -3,6 +3,7 @@ using Economia;
 using Enemigos;
 using Nucleo;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -52,6 +53,7 @@ namespace UI
 
         private void ShowWaveButton()
         {
+            if(FarmBase.Instance.IsDestroyed) return;
             waveButton.SetActive(true);
         }
         
@@ -63,6 +65,16 @@ namespace UI
         private void ShowWin()
         {
             panelWin.SetActive(true);
+        }
+
+        public void MainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene("TestingFede");
         }
     }
 
